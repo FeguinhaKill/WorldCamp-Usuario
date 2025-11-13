@@ -32,10 +32,8 @@ main{
   background-color:var(--verde-escuro);
   border-color:var(--verde-escuro);
 }
-.background-img-fogueira {
-  width: 100%; 
-  height: 200px;
-  background-image: url('../imagens/fogueira.png');
+.background-img-loja {
+  background-image: url('../imagens/imagem_1.png');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
@@ -43,7 +41,31 @@ main{
   background-color: dimgray;
   text-align: center;
   padding-top: 150px;
-  padding-bottom: 250px;
+  padding-bottom: 20px;
+  opacity: 75%;
+}
+.background-img-reservas {
+  background-image: url('../imagens/reservas.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  color:white;
+  background-color: dimgray;
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 20px;
+  opacity: 75%;
+}
+.background-img-trilhas {
+  background-image: url('../imagens/trilha.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  color:white;
+  background-color: dimgray;
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 20px;
   opacity: 75%;
 }
 .titulo{

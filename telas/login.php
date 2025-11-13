@@ -9,7 +9,8 @@ session_start(); //caso uma sessao ja esteja iniciada, pula para a tela do usuar
 $errors = [];
 $email = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') { //if para verificação do usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
+    
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?: '';
     $senha = $_POST['senha'] ?? '';
 
@@ -26,7 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { //if para verificação do usuario
                 $encontrou = false;
                 foreach ($dados as $item) {
                     if ($email === $item->email && $senha === $item->senha) {
+                        $GLOBALS[$item->nome] ;
                         $_SESSION['user_id'] = $item->id;
+                        session_name($item->nome);
                         header('Location: dashboard.php');
                         exit;
                     }
