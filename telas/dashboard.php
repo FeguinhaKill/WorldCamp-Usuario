@@ -4,7 +4,7 @@ include '../header.php';
 include '../db.class.php';
 $db = new db();
 ?>
-
+<link rel="stylesheet" href="../css/styles.css">
 <div class="container">
     <h1>Dashboard</h1>
     <p>Bem-vindo, <?= $_SESSION['nome'] ?>!</p>
