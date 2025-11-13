@@ -24,48 +24,6 @@ main{
   padding-bottom:2rem;
   min-height:120vh;
 }
-
-#mainContatos{
-  flex:1 0 auto;
-  padding-bottom:2rem;
-  min-height:140vh;
-}
-
-#mapPoint {
-  height: 380px;
-  border-radius: .25rem;
-}
-
-.navbar-brand img{
-  height:36px;
-  width:auto;
-  margin-right:.5rem;
-  vertical-align:middle;
-}
-
-header.hero-min{
-  background:linear-gradient(0deg,var(--verde-escuro),var(--verde));
-  color:#fff;
-  padding:40px 0;
-  text-align:center;
-}
-
-.hero-logo{height:40px;width:auto}
-
-aside.sticky{position:sticky;top:1rem}
-
-.carousel-img{
-  height:380px;
-  width:100%;
-  object-fit:cover;
-  object-position:center;
-}
-@media (max-width:991.98px){.carousel-img{height:320px}}
-@media (max-width:767.98px){.carousel-img{height:260px}}
-@media (max-width:575.98px){.carousel-img{height:220px}}
-
-.card img{object-fit:cover;height:180px}
-
 .btn-success{
   background-color:var(--verde);
   border-color:var(--verde-escuro);
@@ -74,35 +32,17 @@ aside.sticky{position:sticky;top:1rem}
   background-color:var(--verde-escuro);
   border-color:var(--verde-escuro);
 }
-header.background-img-alpinismo {
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.background-img-fogueira {
   width: 100%; 
-  height: 200px;
-  background-image: url('../imagens/alpinismo.jpg');
+  height: 400px;
+  background-image: url('../imagens/fogueira.png');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  color: white; 
   background-color: dimgray;
   text-align: center;
   padding-top: 150px;
   padding-bottom: 250px;
-  opacity: 50%;
-}
-header.background-img-trilhas {
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  width: 100%; 
-  height: 200px;
-  background-image: url('../imagens/trilha-bg.png');
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  color: white; 
-  background-color: dimgray;
-  text-align: center;
-  padding-top: 150px;
-  padding-bottom: 250px;
-  opacity: 50%;
 }
 .titulo{
 text-align: center;
@@ -123,15 +63,6 @@ small.faixa{
   border: none;
   border-radius: 20px 10px;
   background: yellowgreen;
-}
-.medalhas{
-  font-family:cursive;
-  border: none;
-  border-radius: 5px 20px;
-  background: black;
-  color: var(--verde-escuro);
-  padding: 5px;
-  margin-top: 10px;
 }
 h1.Principal{
   text-align: center;

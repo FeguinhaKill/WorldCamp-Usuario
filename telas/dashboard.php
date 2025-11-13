@@ -12,12 +12,10 @@ $db = new db();
 <div>
     <div class="row g-3">
         <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                    <div class="card-body">
+            <div class="background-img-fogueira">
+                     <div class="card-body">
                         <a href="lojaProdutos.php" class="btn btn-primary mt-2">Ir para Loja</a>
                     </div>
-                </div>
             </div>
         </div>
 
