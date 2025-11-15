@@ -88,4 +88,12 @@ class db
             $dados['email'],
         ]);
     }
+    function checkLogin()
+    {
+
+        if (empty($_SESSION['nome'])) {
+            session_destroy();
+            header('Location: ../login.php?error=Sessao Expirada!');
+        }
+    }
 }

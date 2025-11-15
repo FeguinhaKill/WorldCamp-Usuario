@@ -28,7 +28,7 @@ if (!empty($_POST)) {
         }
         echo "<script>
         setTimeout(
-        ()=>window.location.href = 'pagina.php', 6900);
+        ()=>window.location.href = 'login.php', 2200);
         </script>";
     } catch (Exception $e) {
         var_dump("Erro ao criar usuário: " . $e->getMessage());

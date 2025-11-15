@@ -6,6 +6,7 @@ $dados = $db->all();
 
 
 session_start(); //caso uma sessao ja esteja iniciada, pula para a tela do usuario
+$_SESSION["nome"] = '';
 $errors = [];
 $email = '';
 
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                 foreach ($dados as $item) {
                     if ($email === $item->email && $senha === $item->senha) {
                         $GLOBALS[$item->nome] ;
-                        $_SESSION['user_id'] = $item->id;
+                        $_SESSION["nome"] = $item->nome;
                         session_name($item->nome);
                         header('Location: dashboard.php');
                         exit;
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                 </div>
 
                 <div class="text-center small">
-                    <a href="/telas/criar.php">Não tenho uma conta '-'</a>
+                    <a href="/telas/criarConta.php">Não tenho uma conta '-'</a>
                 </div>
             </form>
         </div>

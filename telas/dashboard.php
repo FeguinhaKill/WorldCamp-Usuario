@@ -1,19 +1,15 @@
 <?php
 session_start();
-$status = session_status();
 include '../header.php';
 include '../db.class.php';
 $db = new db();
-$dados = $db->all();
-$sessionName = session_name();
-session_decode($sessionName);
-echo($sessionName);
 
+$db->checkLogin();
 ?>
 <link rel="stylesheet" href="../css/styles.css">
 <div class="container">
-    <h1>Dashboard</h1>  
-    <p>Bem-vindo!</p>
+    <h1>Dashboard</h1>
+    <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
 </div>
 <div>
     <div class="row g-3">
