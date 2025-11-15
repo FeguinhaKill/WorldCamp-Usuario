@@ -8,6 +8,7 @@ $db->checkLogin();
 ?>
 <link rel="stylesheet" href="../css/styles.css">
 <div class="container">
+    <Title>Dashboard do Usuário</Title>
     <h1>Dashboard</h1>
     <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
 </div>
@@ -40,3 +41,6 @@ $db->checkLogin();
 
     </div>
 </div>
+<?php
+include '../footer.php';
+?>

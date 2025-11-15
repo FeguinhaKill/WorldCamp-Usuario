@@ -40,7 +40,7 @@ if (!empty($_GET['id'])) {
 }
 
 ?>
-
+<Title>Criar Conta - WorldCamp</Title>
 <h3>Isso será o começo de algo belo, primeiro vamos criar sua conta!</h3>
 <form action="" method="post">
     <input type="hidden" name="id" value="<?= $data->id ?? '' ?>">
@@ -74,7 +74,7 @@ if (!empty($_GET['id'])) {
     </div>
     <div class="row">
         <button type="submit" class="btn btn-primary mt-3">Salvar</button>
-        <a href="./pagina.php" class="btn btn-secondary mt-3">Voltar</a>
+        <a href="./login.php" class="btn btn-secondary mt-3">Ja possuo uma conta</a>
     </div>
 </form>
 

@@ -11,7 +11,6 @@ $db->checkLogin();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WorldCamp Store - Equipamentos e Roupas para Aventura</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -74,12 +73,6 @@ $db->checkLogin();
         height: 220px;
       }
 
-      footer {
-        background-color: var(--verde-escuro);
-        color: #fff;
-        padding: 2rem 0;
-        text-align: center;
-      }
 
       h1.Principal {
         text-align: center;
@@ -120,25 +113,8 @@ $db->checkLogin();
       }
     </style>
   </head>
-
+  <Title>Loja - WorldCamp</Title>
   <body>
-    <!-- Cabeçalho -->
-    <header class="hero-min">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-4 text-start">
-            <a class="text-white text-decoration-none fw-bold" href="#">Loja</a>
-          </div>
-          <div class="col-4 text-center">
-            <h3 class="m-0 fw-bold">🌍 WorldCamp Store</h3>
-          </div>
-          <div class="col-4 text-end">
-            <a class="text-white me-3" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-            <a class="btn btn-sm btn-outline-light" href="#produtos">Produtos</a>
-          </div>
-        </div>
-      </div>
-    </header>
 
     <!-- Main -->
     <main class="container my-5">
@@ -250,17 +226,12 @@ $db->checkLogin();
       </div>
     </main>
 
-    <!-- Rodapé -->
-    <footer>
-      <div class="container">
-        <p class="mb-1">© 2025 WorldCamp Store. Todos os direitos reservados.</p>
-        <p class="small">
-          <a href="#" class="text-white text-decoration-none">Termos e Condições</a> |
-          <a href="#" class="text-white text-decoration-none">Política de Privacidade</a>
-        </p>
-      </div>
-    </footer>
+    <?php
+include '../footer.php';
+?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
+</html>
+
 </html>

@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
     <div class="container">
         <div class="auth-card">
             <div class="text-center mb-4">
-                <div class="logo h1">WorldCamp</div>
+                <div class="logo h1"><img src="../imagens/logoWorldCamp.png" width="100" length="100"alt="Logo">World Camp</div>    
             </div>
 
             <form method="post">
@@ -92,11 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                     <label for="senha" class="form-label small">Senha</label>
                     <input id="senha" name="senha" type="password" class="form-control" required placeholder="senha..">
                 </div>
-
+                <!--
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <a href="/telas/recuperar_senha.php" class="small">Esqueci minha senha...</a>
                 </div>
-
+                FAZER SE SOBRAR TEMPO
+                -->
                 <div class="d-grid mb-2">
                     <button type="submit" class="btn btn-primary">Entrar</button>
                 </div>
@@ -108,5 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
         </div>
     </div>
 </body>
-
+<?php
+include '../footer.php';
+?>
 </html>

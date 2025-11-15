@@ -1,16 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tela Inicial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-        <div class="row">
-          <?php
-            include 'menu.php'; ?>
-            <div class="container mb-4"></div>
+</head>
 
-       
+<body>
+
+<?php
+$hiddenPage = ['login.php', 'criarConta.php', 'index.php'];
+$currentPage = basename($_SERVER['PHP_SELF']);
+
+$showMenu = !in_array($currentPage, $hiddenPage);
+
+if ($showMenu) {
+    include_once '../menu.php';
+}
+?>
+
+    <div class="container mt-4">
+        <div class="row">
