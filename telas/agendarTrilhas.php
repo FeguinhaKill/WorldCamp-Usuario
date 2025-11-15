@@ -16,7 +16,9 @@ $db->checkLogin();
     <title>Agendar Trilhas - WorldCamp</title>
 </head>
 <body>
-    
+    <form>
+        <h1 class="display-1">Agendar Trilhas</h1>
+    </form>
 </body>
 </html>
 
