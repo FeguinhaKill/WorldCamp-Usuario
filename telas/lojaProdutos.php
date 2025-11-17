@@ -6,6 +6,9 @@ $db = new db();
 
 $db->checkLogin();
 ?>
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -17,12 +20,10 @@ $db->checkLogin();
       rel="stylesheet"
     />
 
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-
 
     <style>
       :root {
@@ -73,28 +74,23 @@ $db->checkLogin();
         height: 220px;
       }
 
-
       h1.Principal {
-        background-color: var(--verde);
         text-align: center;
-        font-family: "Times New Roman", Times, serif;
-        color: #FFF;
+        font-family: "Lucida Handwriting", cursive;
+        color: var(--verde);
         margin-top: 50px;
         margin-bottom: 50px;
       }
 
       .hero {
-        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80')
+        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80")
           center/cover no-repeat;
         color: white;
         text-align: center;
         padding: 6rem 2rem;
         border-radius: 10px;
       }
-header {
-  width: 100%;
-  display: block;
-}
+
       .hero h1 {
         font-size: 3rem;
         font-weight: 700;
@@ -116,48 +112,52 @@ header {
         padding-left: 1.5rem;
       }
     </style>
+
+    <title>Loja - WorldCamp</title>
   </head>
-  <header>
-    <h1 class="Principal display-1" id="produtos">Produtos em Destaque</h1>
-  </header>
-  <Title>Loja - WorldCamp</Title>
-      
   <body>
 
     <main class="container my-5">
+
       <section class="hero mb-5">
         <h1>Equipe-se para a Aventura!</h1>
         <p>
-          Explore nossa linha de produtos WorldCamp: roupas, calçados e acessórios para quem ama viver ao ar livre.
+          Explore nossa linha de produtos WorldCamp: roupas, calçados e acessórios
+          pensados para experiências de acampamento inesquecíveis.
         </p>
+        <a href="#produtos" class="btn btn-lg btn-success">Ver Produtos</a>
       </section>
 
-      <!-- Produtos -->
       
+      <h1 class="Principal" id="produtos">Produtos em Destaque</h1>
 
       <div class="row mb-4">
-        <!-- Camiseta -->
+      
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=80" alt="Camiseta WorldCamp" class="card-img-top" />
+            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80"
+                 alt="Garrafa térmica WorldCamp" class="card-img-top" />
             <div class="card-body">
-              <span class="badge bg-success mb-2">Roupa</span>
-              <h4 class="card-title">Camiseta WorldCamp</h4>
+              <span class="badge bg-success mb-2">Acessório</span>
+              <h4 class="card-title">Garrafa Térmica WorldCamp</h4>
               <ul>
-                <li>Tecido leve e respirável</li>
-                <li>Logo exclusivo bordado</li>
-                <li>Ideal para trilhas e aventuras</li>
+                <li>Conserva a temperatura por até 12h</li>
+                <li>Corpo em aço inoxidável</li>
+                <li>Ideal para trilhas longas</li>
               </ul>
-              <p><strong>R$ 89,90</strong></p>
-              <a href="#" class="btn btn-success w-100">Comprar</a>
+              <p><strong>R$ 119,00</strong></p>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Botas de Chuva -->
+ 
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1580910051073-581b9b21a5e5?auto=format&fit=crop&w=800&q=80" alt="Botas de chuva" class="card-img-top" />
+            <img src="https://images.unsplash.com/photo-1580910051073-581b9b21a5e5?auto=format&fit=crop&w=800&q=80"
+                 alt="Botas de chuva" class="card-img-top" />
             <div class="card-body">
               <span class="badge bg-success mb-2">Calçado</span>
               <h4 class="card-title">Botas de Chuva Impermeáveis</h4>
@@ -167,69 +167,107 @@ header {
                 <li>Perfeitas para terrenos molhados</li>
               </ul>
               <p><strong>R$ 249,00</strong></p>
-              <a href="#" class="btn btn-success w-100">Comprar</a>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Jaqueta -->
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1593032457868-24c75b9b2d72?auto=format&fit=crop&w=800&q=80" alt="Jaqueta esportiva" class="card-img-top" />
+            <img src="https://images.unsplash.com/photo-1593032457868-24c75b9b2d72?auto=format&fit=crop&w=800&q=80"
+                 alt="Jaqueta School WorldCamp" class="card-img-top" />
             <div class="card-body">
               <span class="badge bg-success mb-2">Roupa</span>
-              <h4 class="card-title">Jaqueta Esportiva WorldCamp</h4>
+              <h4 class="card-title">Jaqueta School WorldCamp</h4>
               <ul>
                 <li>Proteção contra vento e chuva</li>
                 <li>Tecido térmico leve</li>
-                <li>Design moderno e confortável</li>
+                <li>Visual oficial do acampamento</li>
               </ul>
               <p><strong>R$ 329,00</strong></p>
-              <a href="#" class="btn btn-success w-100">Comprar</a>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Linha 2 -->
       <div class="row mb-4">
-        <!-- Garrafa -->
-        <div class="col-md-6 mb-4">
+ 
+        <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80" alt="Garrafa térmica" class="card-img-top" />
+            <img src="https://images.unsplash.com/photo-1521225753516-46438a76f3c4?auto=format&fit=crop&w=800&q=80"
+                 alt="Chapéu de acampamento" class="card-img-top" />
             <div class="card-body">
               <span class="badge bg-success mb-2">Acessório</span>
-              <h4 class="card-title">Garrafa Térmica WorldCamp</h4>
+              <h4 class="card-title">Chapéu de Acampamento</h4>
               <ul>
-                <li>Conserva a temperatura por até 12h</li>
-                <li>Corpo em aço inoxidável</li>
-                <li>750ml de capacidade</li>
+                <li>Proteção contra o sol</li>
+                <li>Ajuste com cordão</li>
+                <li>Estilo aventureiro WorldCamp</li>
               </ul>
-              <p><strong>R$ 119,00</strong></p>
-              <a href="#" class="btn btn-success w-100">Comprar</a>
+              <p><strong>R$ 79,90</strong></p>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Kit Adicional -->
-        <div class="col-md-6 mb-4">
+    
+        <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="https://images.unsplash.com/photo-1598387846115-16af62c58b6a?auto=format&fit=crop&w=800&q=80" alt="Kit acessórios" class="card-img-top" />
+            <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=80"
+                 alt="Camiseta personalizada" class="card-img-top" />
             <div class="card-body">
-              <span class="badge bg-success mb-2">Adicional</span>
-              <h4 class="card-title">Kit Aventureiro WorldCamp</h4>
+              <span class="badge bg-success mb-2">Roupa</span>
+              <h4 class="card-title">Camiseta Personalizada WorldCamp</h4>
               <ul>
-                <li>Caneca + lanterna + chaveiro temático</li>
-                <li>Brinde exclusivo WorldCamp</li>
-                <li>Ideal para presentear</li>
+                <li>Nome, turma ou frase personalizada</li>
+                <li>Tecido leve e respirável</li>
+                <li>Lembrança oficial do acampamento</li>
+              </ul>
+              <p><strong>R$ 89,90</strong></p>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </div>
+
+   
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1598387846115-16af62c58b6a?auto=format&fit=crop&w=800&q=80"
+                 alt="Kit aleatório" class="card-img-top" />
+            <div class="card-body">
+              <span class="badge bg-success mb-2">Kit</span>
+              <h4 class="card-title">Kit Aleatório WorldCamp</h4>
+              <ul>
+                <li>Contém de 3 a 5 itens surpresa</li>
+                <li>Selecionados pela equipe WorldCamp</li>
+                <li>Perfeito para quem gosta de novidade</li>
               </ul>
               <p><strong>R$ 159,00</strong></p>
-              <a href="#" class="btn btn-success w-100">Comprar</a>
+              <a href="#" class="btn btn-success w-100">
+                <i class="fa-solid fa-cart-plus"></i> Comprar
+              </a>
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <?php
+    include '../footer.php';
+    ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
 
     <?php
 include '../footer.php';
@@ -240,3 +278,4 @@ include '../footer.php';
 </html>
 
 </html>
+
