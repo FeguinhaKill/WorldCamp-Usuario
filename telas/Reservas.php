@@ -117,6 +117,11 @@ $db->checkLogin();
       .badge.bg-success {
         background-color: var(--verde) !important;
       }
+
+      .resumo-total {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
     </style>
 
     <title>Reservas - WorldCamp</title>
@@ -125,7 +130,6 @@ $db->checkLogin();
 
     <main class="container my-4">
 
-    
       <section class="hero-reservas mb-5">
         <h1>Reserve seu cantinho no WorldCamp</h1>
         <p>
@@ -136,7 +140,6 @@ $db->checkLogin();
           <i class="fa-solid fa-calendar-check"></i> Fazer reserva
         </a>
       </section>
-
 
       <h1 class="Principal">Opções de hospedagem</h1>
 
@@ -208,7 +211,6 @@ $db->checkLogin();
         </div>
       </section>
 
-    
       <section class="mb-5" id="form-reserva">
         <div class="row g-4">
           <div class="col-lg-7">
@@ -223,9 +225,8 @@ $db->checkLogin();
                   confirmação final.
                 </p>
 
-               
                 <form action="processa_reserva.php" method="post">
-       
+                  <!-- Tipo de acomodação -->
                   <div class="mb-3">
                     <label for="tipo_acomodacao" class="form-label">
                       Tipo de acomodação
@@ -243,7 +244,7 @@ $db->checkLogin();
                     </select>
                   </div>
 
-               
+                  <!-- Dados pessoais -->
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="nome_completo" class="form-label">Nome completo</label>
@@ -292,7 +293,7 @@ $db->checkLogin();
                     </div>
                   </div>
 
-                 
+                  <!-- Datas -->
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="data_checkin" class="form-label">Data de check-in</label>
@@ -316,6 +317,39 @@ $db->checkLogin();
                     </div>
                   </div>
 
+                  <!-- Forma de pagamento + total -->
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="forma_pagamento" class="form-label">Forma de pagamento</label>
+                      <select
+                        class="form-select"
+                        id="forma_pagamento"
+                        name="forma_pagamento"
+                      >
+                        <option value="">Selecione</option>
+                        <option value="cartao_credito">Cartão de crédito</option>
+                        <option value="pix">PIX</option>
+                        <option value="boleto">Boleto bancário</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label for="valor_total" class="form-label">Valor total estimado</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="valor_total"
+                        name="valor_total"
+                        readonly
+                        placeholder="R$ 0,00"
+                      />
+                      <div class="resumo-total mt-1" id="resumo_diarias">
+                        <!-- resumo de diárias aparece aqui via JS -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Observações -->
                   <div class="mb-3">
                     <label for="observacoes" class="form-label">
                       Observações (pets, restrições, voluntariado etc.)
@@ -367,6 +401,69 @@ $db->checkLogin();
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+ 
+    <script>
+      const campoTipo = document.getElementById('tipo_acomodacao');
+      const campoCheckin = document.getElementById('data_checkin');
+      const campoCheckout = document.getElementById('data_checkout');
+      const campoValorTotal = document.getElementById('valor_total');
+      const resumoDiarias = document.getElementById('resumo_diarias');
+
+      const valoresDiaria = {
+        cabana: 600,
+        dormitorio: 300,
+        voluntariado: 0
+      };
+
+      function calcularTotal() {
+        const tipo = campoTipo.value;
+        const checkin = campoCheckin.value;
+        const checkout = campoCheckout.value;
+
+       
+        if (!tipo || !checkin || !checkout) {
+          campoValorTotal.value = '';
+          resumoDiarias.textContent = '';
+          return;
+        }
+
+        const dataIn = new Date(checkin);
+        const dataOut = new Date(checkout);
+
+        const diffMs = dataOut - dataIn;
+        const dias = diffMs / (1000 * 60 * 60 * 24);
+
+        if (isNaN(dias) || dias <= 0) {
+          campoValorTotal.value = '';
+          resumoDiarias.textContent = 'Verifique as datas: o check-out deve ser depois do check-in.';
+          return;
+        }
+
+        const diaria = valoresDiaria[tipo] ?? 0;
+
+        if (tipo === 'voluntariado') {
+          campoValorTotal.value = 'R$ 0,00';
+          resumoDiarias.textContent = 'Programa de voluntariado: não há cobrança de diária.';
+          return;
+        }
+
+        const total = diaria * dias;
+        campoValorTotal.value = total.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        });
+
+        resumoDiarias.textContent =
+          `Cálculo: ${dias} diária(s) × ` +
+          diaria.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) +
+          ` = ${campoValorTotal.value}`;
+      }
+
+      campoTipo.addEventListener('change', calcularTotal);
+      campoCheckin.addEventListener('change', calcularTotal);
+      campoCheckout.addEventListener('change', calcularTotal);
+    </script>
   </body>
 </html>
 
@@ -374,4 +471,5 @@ $db->checkLogin();
 include '../footer.php';
 
 ?>
+
 
