@@ -125,7 +125,7 @@ $db->checkLogin();
 
     <main class="container my-4">
 
-      <!-- Hero / topo diferente da lojinha -->
+    
       <section class="hero-reservas mb-5">
         <h1>Reserve seu cantinho no WorldCamp</h1>
         <p>
@@ -137,7 +137,7 @@ $db->checkLogin();
         </a>
       </section>
 
-      <!-- Opções de acomodação -->
+
       <h1 class="Principal">Opções de hospedagem</h1>
 
       <section class="row g-4 mb-5 resumo-texto">
@@ -208,7 +208,7 @@ $db->checkLogin();
         </div>
       </section>
 
-      <!-- Formulário de reserva -->
+    
       <section class="mb-5" id="form-reserva">
         <div class="row g-4">
           <div class="col-lg-7">
@@ -223,9 +223,9 @@ $db->checkLogin();
                   confirmação final.
                 </p>
 
-                <!-- IMPORTANTE: esse form depois vai enviar para o backend -->
+               
                 <form action="processa_reserva.php" method="post">
-                  <!-- Tipo de acomodação -->
+       
                   <div class="mb-3">
                     <label for="tipo_acomodacao" class="form-label">
                       Tipo de acomodação
@@ -243,7 +243,7 @@ $db->checkLogin();
                     </select>
                   </div>
 
-                  <!-- Dados pessoais básicos -->
+               
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="nome_completo" class="form-label">Nome completo</label>
@@ -292,7 +292,7 @@ $db->checkLogin();
                     </div>
                   </div>
 
-                  <!-- Datas (para voluntariado também dá pra usar como período desejado) -->
+                 
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="data_checkin" class="form-label">Data de check-in</label>
@@ -316,7 +316,6 @@ $db->checkLogin();
                     </div>
                   </div>
 
-                  <!-- Observações -->
                   <div class="mb-3">
                     <label for="observacoes" class="form-label">
                       Observações (pets, restrições, voluntariado etc.)
@@ -338,7 +337,6 @@ $db->checkLogin();
             </div>
           </div>
 
-          <!-- Resumo / ajuda lateral -->
           <div class="col-lg-5">
             <div class="card shadow-sm h-100">
               <div class="card-body">
@@ -376,3 +374,4 @@ $db->checkLogin();
 include '../footer.php';
 
 ?>
+
