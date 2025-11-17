@@ -14,13 +14,12 @@ $db->checkLogin();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
-    <!-- Font Awesome -->
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -128,11 +127,10 @@ $db->checkLogin();
         </p>
       </section>
 
-      <!-- TRILHAS COM FORMULÁRIO PRÓPRIO -->
       <h1 class="Principal">Nossas Trilhas</h1>
 
       <section class="row g-4 mb-5">
-        <!-- Trilha Vale Verde -->
+   
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -152,7 +150,7 @@ $db->checkLogin();
                 <strong>Idade mínima:</strong> 7 anos
               </p>
 
-              <!-- Formulário próprio da trilha Vale Verde -->
+            
               <form action="#" method="post">
                 <input type="hidden" name="trilha" value="vale_verde" />
                 <div class="mb-2">
@@ -196,7 +194,6 @@ $db->checkLogin();
           </div>
         </div>
 
-        <!-- Trilha Pedra Clara -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -218,7 +215,6 @@ $db->checkLogin();
                 <strong>Idade mínima:</strong> 12 anos
               </p>
 
-              <!-- Formulário próprio da trilha Pedra Clara -->
               <form action="#" method="post">
                 <input type="hidden" name="trilha" value="pedra_clara" />
                 <div class="mb-2">
@@ -262,7 +258,7 @@ $db->checkLogin();
           </div>
         </div>
 
-        <!-- Trilha Pico Nebuloso -->
+       
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -282,7 +278,7 @@ $db->checkLogin();
                 <strong>Idade mínima:</strong> 16 anos
               </p>
 
-              <!-- Formulário próprio da trilha Pico Nebuloso -->
+        
               <form action="#" method="post">
                 <input type="hidden" name="trilha" value="pico_nebuloso" />
                 <div class="mb-2">
@@ -338,4 +334,5 @@ $db->checkLogin();
 include '../footer.php';
 
 ?>
+
 
