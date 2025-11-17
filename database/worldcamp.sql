@@ -21,26 +21,30 @@ USE `worldcamp`;
 
 -- Copiando estrutura para tabela worldcamp.agendardormitorio
 CREATE TABLE IF NOT EXISTS `agendardormitorio` (
+  `Id` int NOT NULL AUTO_INCREMENT,
   `nome-usuario` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `check-in` date NOT NULL,
   `check-out` date NOT NULL,
-  `dormitorio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `dormitorio` int NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.agendardormitorio: ~1 rows (aproximadamente)
-INSERT INTO `agendardormitorio` (`nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
-	('FELIPE', '2025-11-17', '2025-11-18', 1);
+-- Copiando dados para a tabela worldcamp.agendardormitorio: ~0 rows (aproximadamente)
+INSERT INTO `agendardormitorio` (`Id`, `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
+	(1, 'FELIPE', '2025-11-17', '2025-11-18', 1);
 
 -- Copiando estrutura para tabela worldcamp.agendartrilhas
 CREATE TABLE IF NOT EXISTS `agendartrilhas` (
+  `Id` int NOT NULL AUTO_INCREMENT,
   `nome-usuario` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `data-realização` date NOT NULL,
-  `trilha` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+  `trilha` int NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela worldcamp.agendartrilhas: ~1 rows (aproximadamente)
-INSERT INTO `agendartrilhas` (`nome-usuario`, `data-realização`, `trilha`) VALUES
-	('FELIPE', '2025-11-17', 1);
+-- Copiando dados para a tabela worldcamp.agendartrilhas: ~0 rows (aproximadamente)
+INSERT INTO `agendartrilhas` (`Id`, `nome-usuario`, `data-realização`, `trilha`) VALUES
+	(1, 'FELIPE', '2025-11-17', 1);
 
 -- Copiando estrutura para tabela worldcamp.listausuarios
 CREATE TABLE IF NOT EXISTS `listausuarios` (
@@ -53,19 +57,21 @@ CREATE TABLE IF NOT EXISTS `listausuarios` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.listausuarios: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.listausuarios: ~0 rows (aproximadamente)
 INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
 	(2, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
 
 -- Copiando estrutura para tabela worldcamp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
+  `Id` int NOT NULL AUTO_INCREMENT,
   `Nome` text,
-  `quantidade` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quantidade` int DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.produtos: ~1 rows (aproximadamente)
-INSERT INTO `produtos` (`Nome`, `quantidade`) VALUES
-	('camiseta', 50);
+-- Copiando dados para a tabela worldcamp.produtos: ~0 rows (aproximadamente)
+INSERT INTO `produtos` (`Id`, `Nome`, `quantidade`) VALUES
+	(1, 'camiseta', 50);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
