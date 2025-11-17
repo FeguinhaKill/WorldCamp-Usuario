@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                         $GLOBALS[$item->nome] ;
                         $_SESSION["nome"] = $item->nome;
                         session_name($item->nome);
-                        header('Location: dashboard.php');
+                        header('Location: ../telas/dashboard.php');
                         exit;
                     }
                 }
