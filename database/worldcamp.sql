@@ -19,29 +19,6 @@
 CREATE DATABASE IF NOT EXISTS `worldcamp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `worldcamp`;
 
--- Copiando estrutura para tabela worldcamp.agendardormitorio
-CREATE TABLE IF NOT EXISTS `agendardormitorio` (
-  `nome-usuario` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `check-in` date NOT NULL,
-  `check-out` date NOT NULL,
-  `dormitorio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela worldcamp.agendardormitorio: ~1 rows (aproximadamente)
-INSERT INTO `agendardormitorio` (`nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
-	('FELIPE', '2025-11-17', '2025-11-18', 1);
-
--- Copiando estrutura para tabela worldcamp.agendartrilhas
-CREATE TABLE IF NOT EXISTS `agendartrilhas` (
-  `nome-usuario` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `data-realização` date NOT NULL,
-  `trilha` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
-
--- Copiando dados para a tabela worldcamp.agendartrilhas: ~1 rows (aproximadamente)
-INSERT INTO `agendartrilhas` (`nome-usuario`, `data-realização`, `trilha`) VALUES
-	('FELIPE', '2025-11-17', 1);
-
 -- Copiando estrutura para tabela worldcamp.listausuarios
 CREATE TABLE IF NOT EXISTS `listausuarios` (
   `Id` int NOT NULL AUTO_INCREMENT,
@@ -53,19 +30,7 @@ CREATE TABLE IF NOT EXISTS `listausuarios` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.listausuarios: ~1 rows (aproximadamente)
-INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
-	(1, 'FELIPE', 'feguinhak2@gmail.com', '126-263-239-00', '49998041402', '123q');
-
--- Copiando estrutura para tabela worldcamp.produtos
-CREATE TABLE IF NOT EXISTS `produtos` (
-  `Nome` text,
-  `quantidade` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela worldcamp.produtos: ~1 rows (aproximadamente)
-INSERT INTO `produtos` (`Nome`, `quantidade`) VALUES
-	('camiseta', 50);
+-- Copiando dados para a tabela worldcamp.listausuarios: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
