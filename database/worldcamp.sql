@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `agendardormitorio` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.agendardormitorio: ~0 rows (aproximadamente)
-INSERT INTO `agendardormitorio` (`Id`, `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
-	(1, 'FELIPE', '2025-11-17', '2025-11-18', 1);
+INSERT INTO `agendardormitorio` ( `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
+	( 'FELIPE', '2025-11-17', '2025-11-18', 1);
 
 -- Copiando estrutura para tabela worldcamp.agendartrilhas
 CREATE TABLE IF NOT EXISTS `agendartrilhas` (
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `agendartrilhas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 
 -- Copiando dados para a tabela worldcamp.agendartrilhas: ~0 rows (aproximadamente)
-INSERT INTO `agendartrilhas` (`Id`, `nome-usuario`, `data-realização`, `trilha`) VALUES
-	(1, 'FELIPE', '2025-11-17', 1);
+INSERT INTO `agendartrilhas` ( `nome-usuario`, `data-realização`, `trilha`) VALUES
+	('FELIPE', '2025-11-17', 1);
 
 -- Copiando estrutura para tabela worldcamp.listausuarios
 CREATE TABLE IF NOT EXISTS `listausuarios` (
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `listausuarios` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.listausuarios: ~0 rows (aproximadamente)
-INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
-	(2, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
+INSERT INTO `listausuarios` ( `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
+	( 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
 
 -- Copiando estrutura para tabela worldcamp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `produtos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.produtos: ~0 rows (aproximadamente)
-INSERT INTO `produtos` (`Id`, `Nome`, `quantidade`) VALUES
-	(1, 'camiseta', 50);
+INSERT INTO `produtos` ( `Nome`, `quantidade`) VALUES
+	( 'camiseta', 50);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
