@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../header.php';
-include '../db.class.php';
+include '../../header.php';
+include '../../database/db.class.php';
 $db = new db();
 
 $db->checkLogin();
@@ -468,7 +468,7 @@ $db->checkLogin();
 </html>
 
 <?php
-include '../footer.php';
+include '../../footer.php';
 
 ?>
 

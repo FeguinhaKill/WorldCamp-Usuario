@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../header.php';
-include '../db.class.php';
+include '../database/db.class.php';
 $db = new db();
 
 $db->checkLogin();
