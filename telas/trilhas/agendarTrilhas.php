@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../header.php';
-include '../db.class.php';
+include '../../header.php';
+include '../../database/db.class.php';
 $db = new db();
 
 $db->checkLogin();
@@ -18,6 +18,7 @@ $db->checkLogin();
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
 
     <link
       rel="stylesheet"
@@ -129,17 +130,17 @@ $db->checkLogin();
       <h1 class="Principal">Nossas Trilhas</h1>
 
       <section class="row g-4 mb-5">
-        <!-- TRILHA DA CACHOEIRA -->
+   
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="../imagens/trilha_cachoeira_1.png"
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
               class="card-img-top"
-              alt="Trilha da Cachoeira"
+              alt="Trilha do Vale Verde"
             />
             <div class="card-body">
               <span class="badge bg-success badge-nivel mb-2">Nível: Fácil</span>
-              <h4 class="card-title">Trilha da Cachoeira</h4>
+              <h4 class="card-title">Trilha do Vale Verde</h4>
               <p class="card-text">
                 A Trilha da Cachoeira é uma das mais populares entre nossos participantes, 
                 com duração média de 2 horas e meia, levando a uma belíssima cachoeira 
@@ -154,72 +155,71 @@ $db->checkLogin();
                 disponibilizados por nossa equipe, com duração aproximada de 1 hora.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 2h30<br />
-                <strong>Idade mínima:</strong> 5 anos
+                <strong>Duração:</strong> 1h30<br />
+                <strong>Idade mínima:</strong> 7 anos
               </p>
 
+            
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="cachoeira" />
+                <input type="hidden" name="trilha" value="vale_verde" />
                 <div class="mb-2">
-                  <label for="nome_cachoeira" class="form-label">Nome completo</label>
+                  <label for="nome_vale" class="form-label" value="<?php ?>">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_cachoeira"
+                    id="nome_vale"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_cachoeira" class="form-label">E-mail</label>
+                  <label for="email_vale" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_cachoeira"
+                    id="email_vale"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_cachoeira" class="form-label">Data desejada</label>
+                  <label for="data_vale" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_cachoeira"
+                    id="data_vale"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i>
-                  Inscrever na Trilha da Cachoeira
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Vale Verde
                 </button>
               </form>
             </div>
           </div>
         </div>
 
-        <!-- TRILHA DA MONTANHA -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="../imagens/trilha_montanha_1.png"
+              src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?auto=format&fit=crop&w=800&q=80"
               class="card-img-top"
-              alt="Trilha da Montanha"
+              alt="Trilha da Pedra Clara"
             />
             <div class="card-body">
               <span class="badge bg-warning text-dark badge-nivel mb-2"
                 >Nível: Intermediário</span
               >
-              <h4 class="card-title">Trilha da Montanha</h4>
+              <h4 class="card-title">Trilha da Pedra Clara</h4>
               <p class="card-text">
                 A trilha consiste em uma caminhada duradoura, com média de 3 horas e 
                 3 paradas ao longo do caminho.<br><br>
                 Leva até o pé de uma de nossas montanhas mais simples, porém belíssimas 
-                (<a href="../paginas/Alpinismo.html#Montanha_S">Sonna Peaks</a>), 
+                (Sonna Peaks), 
                 com uma vista incrível e contato direto com a natureza ao redor.<br><br>
                 De dificuldade moderada, conta com subidas e descidas que exigem um bom 
                 condicionamento físico, mas nada fora do alcance de quem já pratica caminhadas.<br><br>
@@ -228,65 +228,64 @@ $db->checkLogin();
                 a montanha e a construção do percurso como um todo.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 3h<br />
-                <strong>Idade mínima:</strong> 11 anos
+                <strong>Duração:</strong> 2h30<br />
+                <strong>Idade mínima:</strong> 12 anos
               </p>
 
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="montanha" />
+                <input type="hidden" name="trilha" value="pedra_clara" />
                 <div class="mb-2">
-                  <label for="nome_montanha" class="form-label">Nome completo</label>
+                  <label for="nome_pedra" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_montanha"
+                    id="nome_pedra"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_montanha" class="form-label">E-mail</label>
+                  <label for="email_pedra" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_montanha"
+                    id="email_pedra"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_montanha" class="form-label">Data desejada</label>
+                  <label for="data_pedra" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_montanha"
+                    id="data_pedra"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i>
-                  Inscrever na Trilha da Montanha
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha da Pedra Clara
                 </button>
               </form>
             </div>
           </div>
         </div>
 
-        <!-- TRILHA DA CAVERNA -->
+       
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="../imagens/trilha_caverna_1.png"
+              src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=800&q=80"
               class="card-img-top"
-              alt="Trilha da Caverna"
+              alt="Trilha do Pico Nebuloso"
             />
             <div class="card-body">
               <span class="badge bg-danger badge-nivel mb-2">Nível: Avançado</span>
-              <h4 class="card-title">Trilha da Caverna</h4>
+              <h4 class="card-title">Trilha do Pico Nebuloso</h4>
               <p class="card-text">
                 A Trilha da Caverna é uma das mais desafiadoras, por adentrar uma caverna 
                 de baixa luminosidade, porém de ampla extensão, levando em média 2 horas para 
@@ -303,48 +302,48 @@ $db->checkLogin();
                 constante da equipe, garantindo a segurança de todos.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 2h<br />
-                <strong>Idade mínima:</strong> 13 anos
+                <strong>Duração:</strong> 4h<br />
+                <strong>Idade mínima:</strong> 16 anos
               </p>
 
+        
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="caverna" />
+                <input type="hidden" name="trilha" value="pico_nebuloso" />
                 <div class="mb-2">
-                  <label for="nome_caverna" class="form-label">Nome completo</label>
+                  <label for="nome_pico" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_caverna"
+                    id="nome_pico"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_caverna" class="form-label">E-mail</label>
+                  <label for="email_pico" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_caverna"
+                    id="email_pico"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_caverna" class="form-label">Data desejada</label>
+                  <label for="data_pico" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_caverna"
+                    id="data_pico"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i>
-                  Inscrever na Trilha da Caverna
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Pico Nebuloso
                 </button>
               </form>
             </div>
@@ -357,6 +356,11 @@ $db->checkLogin();
   </body>
 </html>
 
+
+
 <?php
-include '../footer.php';
+include '../../footer.php';
+
 ?>
+
+
