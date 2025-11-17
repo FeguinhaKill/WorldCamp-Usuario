@@ -75,9 +75,10 @@ $db->checkLogin();
 
 
       h1.Principal {
+        background-color: var(--verde);
         text-align: center;
-        font-family: "Lucida Handwriting", cursive;
-        color: var(--verde);
+        font-family: "Times New Roman", Times, serif;
+        color: #FFF;
         margin-top: 50px;
         margin-bottom: 50px;
       }
@@ -90,7 +91,10 @@ $db->checkLogin();
         padding: 6rem 2rem;
         border-radius: 10px;
       }
-
+header {
+  width: 100%;
+  display: block;
+}
       .hero h1 {
         font-size: 3rem;
         font-weight: 700;
@@ -113,22 +117,23 @@ $db->checkLogin();
       }
     </style>
   </head>
+  <header>
+    <h1 class="Principal display-1" id="produtos">Produtos em Destaque</h1>
+  </header>
   <Title>Loja - WorldCamp</Title>
+      
   <body>
 
-    <!-- Main -->
     <main class="container my-5">
-      <!-- Hero -->
       <section class="hero mb-5">
         <h1>Equipe-se para a Aventura!</h1>
         <p>
           Explore nossa linha de produtos WorldCamp: roupas, calçados e acessórios para quem ama viver ao ar livre.
         </p>
-        <a href="#produtos" class="btn btn-lg btn-success">Ver Produtos</a>
       </section>
 
       <!-- Produtos -->
-      <h1 class="Principal" id="produtos">Produtos em Destaque</h1>
+      
 
       <div class="row mb-4">
         <!-- Camiseta -->
