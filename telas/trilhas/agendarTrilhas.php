@@ -19,7 +19,6 @@ $db->checkLogin();
       rel="stylesheet"
     />
 
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -130,192 +129,222 @@ $db->checkLogin();
       <h1 class="Principal">Nossas Trilhas</h1>
 
       <section class="row g-4 mb-5">
-   
+        <!-- TRILHA DA CACHOEIRA -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+              src="../imagens/trilha_cachoeira_1.png"
               class="card-img-top"
-              alt="Trilha do Vale Verde"
+              alt="Trilha da Cachoeira"
             />
             <div class="card-body">
               <span class="badge bg-success badge-nivel mb-2">Nível: Fácil</span>
-              <h4 class="card-title">Trilha do Vale Verde</h4>
+              <h4 class="card-title">Trilha da Cachoeira</h4>
               <p class="card-text">
-                Caminhada leve por campos abertos e riachos rasos. Ideal para iniciantes,
-                famílias e grupos escolares.
+                A Trilha da Cachoeira é uma das mais populares entre nossos participantes, 
+                com duração média de 2 horas e meia, levando a uma belíssima cachoeira 
+                escondida dentro da floresta.<br><br>
+                De dificuldade leve, possui poucas inclinações durante o percurso, sendo 
+                indicada para todas as idades. A quantidade de profissionais que acompanharão 
+                o grupo varia conforme a demanda de participantes e a faixa etária.<br><br>
+                Durante o percurso, nossos profissionais explicam sobre a fauna e flora local, 
+                além de curiosidades sobre a cachoeira e sua descoberta.<br><br>
+                Ao final da trilha, haverá um tempo reservado para que os participantes possam 
+                aproveitar a cachoeira, nadar e tirar fotos, sempre com acompanhamento e lanches 
+                disponibilizados por nossa equipe, com duração aproximada de 1 hora.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 1h30<br />
-                <strong>Idade mínima:</strong> 7 anos
+                <strong>Duração:</strong> 2h30<br />
+                <strong>Idade mínima:</strong> 5 anos
               </p>
 
-            
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="vale_verde" />
+                <input type="hidden" name="trilha" value="cachoeira" />
                 <div class="mb-2">
-                  <label for="nome_vale" class="form-label">Nome completo</label>
+                  <label for="nome_cachoeira" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_vale"
+                    id="nome_cachoeira"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_vale" class="form-label">E-mail</label>
+                  <label for="email_cachoeira" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_vale"
+                    id="email_cachoeira"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_vale" class="form-label">Data desejada</label>
+                  <label for="data_cachoeira" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_vale"
+                    id="data_cachoeira"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Vale Verde
+                  <i class="fa-solid fa-paper-plane"></i>
+                  Inscrever na Trilha da Cachoeira
                 </button>
               </form>
             </div>
           </div>
         </div>
 
+        <!-- TRILHA DA MONTANHA -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?auto=format&fit=crop&w=800&q=80"
+              src="../imagens/trilha_montanha_1.png"
               class="card-img-top"
-              alt="Trilha da Pedra Clara"
+              alt="Trilha da Montanha"
             />
             <div class="card-body">
               <span class="badge bg-warning text-dark badge-nivel mb-2"
                 >Nível: Intermediário</span
               >
-              <h4 class="card-title">Trilha da Pedra Clara</h4>
+              <h4 class="card-title">Trilha da Montanha</h4>
               <p class="card-text">
-                Terreno variado com subidas moderadas e mirantes naturais. Ideal para quem já tem
-                alguma experiência em trilhas.
+                A trilha consiste em uma caminhada duradoura, com média de 3 horas e 
+                3 paradas ao longo do caminho.<br><br>
+                Leva até o pé de uma de nossas montanhas mais simples, porém belíssimas 
+                (<a href="../paginas/Alpinismo.html#Montanha_S">Sonna Peaks</a>), 
+                com uma vista incrível e contato direto com a natureza ao redor.<br><br>
+                De dificuldade moderada, conta com subidas e descidas que exigem um bom 
+                condicionamento físico, mas nada fora do alcance de quem já pratica caminhadas.<br><br>
+                O grupo será guiado por nossos profissionais, definidos conforme a faixa etária, 
+                que também apresentam informações sobre a fauna, a flora local e curiosidades sobre 
+                a montanha e a construção do percurso como um todo.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 2h30<br />
-                <strong>Idade mínima:</strong> 12 anos
+                <strong>Duração:</strong> 3h<br />
+                <strong>Idade mínima:</strong> 11 anos
               </p>
 
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="pedra_clara" />
+                <input type="hidden" name="trilha" value="montanha" />
                 <div class="mb-2">
-                  <label for="nome_pedra" class="form-label">Nome completo</label>
+                  <label for="nome_montanha" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_pedra"
+                    id="nome_montanha"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_pedra" class="form-label">E-mail</label>
+                  <label for="email_montanha" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_pedra"
+                    id="email_montanha"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_pedra" class="form-label">Data desejada</label>
+                  <label for="data_montanha" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_pedra"
+                    id="data_montanha"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha da Pedra Clara
+                  <i class="fa-solid fa-paper-plane"></i>
+                  Inscrever na Trilha da Montanha
                 </button>
               </form>
             </div>
           </div>
         </div>
 
-       
+        <!-- TRILHA DA CAVERNA -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
-              src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=800&q=80"
+              src="../imagens/trilha_caverna_1.png"
               class="card-img-top"
-              alt="Trilha do Pico Nebuloso"
+              alt="Trilha da Caverna"
             />
             <div class="card-body">
               <span class="badge bg-danger badge-nivel mb-2">Nível: Avançado</span>
-              <h4 class="card-title">Trilha do Pico Nebuloso</h4>
+              <h4 class="card-title">Trilha da Caverna</h4>
               <p class="card-text">
-                Subidas intensas, terreno rochoso e clima variável. Trilha guiada por
-                instrutores experientes.
+                A Trilha da Caverna é uma das mais desafiadoras, por adentrar uma caverna 
+                de baixa luminosidade, porém de ampla extensão, levando em média 2 horas para 
+                ser concluída, com 2 paradas e diversas saídas de emergência ao longo do percurso.<br><br>
+                A trilha leva os participantes até uma caverna natural, descoberta por nossos 
+                profissionais durante explorações na região.<br><br>
+                É necessário bom condicionamento físico e, principalmente, controle emocional, 
+                devido a possíveis gatilhos de claustrofobia, uma vez que o trajeto é feito 
+                praticamente todo dentro da caverna.<br><br>
+                A participação é restrita para idades acima de 13 anos, por questões de segurança. 
+                Durante o trajeto, nossos profissionais apresentam curiosidades sobre a caverna 
+                e sobre a descoberta do percurso.<br><br>
+                Ao final, os participantes têm a oportunidade de explorar a área com supervisão 
+                constante da equipe, garantindo a segurança de todos.
               </p>
               <p class="mb-2">
-                <strong>Duração:</strong> 4h<br />
-                <strong>Idade mínima:</strong> 16 anos
+                <strong>Duração:</strong> 2h<br />
+                <strong>Idade mínima:</strong> 13 anos
               </p>
 
-        
               <form action="#" method="post">
-                <input type="hidden" name="trilha" value="pico_nebuloso" />
+                <input type="hidden" name="trilha" value="caverna" />
                 <div class="mb-2">
-                  <label for="nome_pico" class="form-label">Nome completo</label>
+                  <label for="nome_caverna" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome_pico"
+                    id="nome_caverna"
                     name="nome"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="email_pico" class="form-label">E-mail</label>
+                  <label for="email_caverna" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email_pico"
+                    id="email_caverna"
                     name="email"
                     required
                   />
                 </div>
 
                 <div class="mb-2">
-                  <label for="data_pico" class="form-label">Data desejada</label>
+                  <label for="data_caverna" class="form-label">Data desejada</label>
                   <input
                     type="date"
                     class="form-control"
-                    id="data_pico"
+                    id="data_caverna"
                     name="data_trilha"
                     required
                   />
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">
-                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Pico Nebuloso
+                  <i class="fa-solid fa-paper-plane"></i>
+                  Inscrever na Trilha da Caverna
                 </button>
               </form>
             </div>
@@ -328,11 +357,6 @@ $db->checkLogin();
   </body>
 </html>
 
-
-
 <?php
 include '../footer.php';
-
 ?>
-
-
