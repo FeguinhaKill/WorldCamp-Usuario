@@ -38,7 +38,6 @@ $db->checkLogin();
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        padding-bottom: 72px;
         color: var(--texto);
       }
 
@@ -67,11 +66,6 @@ $db->checkLogin();
         text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
       }
 
-      .hero-trilhas p {
-        max-width: 720px;
-        margin: 1rem auto 0;
-      }
-
       h1.Principal {
         text-align: center;
         font-family: "Lucida Handwriting", cursive;
@@ -98,6 +92,28 @@ $db->checkLogin();
       .badge-nivel {
         font-size: 0.8rem;
       }
+
+      .card-trilha form {
+        border-top: 1px solid #e9ecef;
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
+      .card-trilha label {
+        font-size: 0.85rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .card-trilha .form-control,
+      .card-trilha .form-select {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.4rem;
+      }
+
+      .card-trilha button[type="submit"] {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
     </style>
 
     <title>Inscrição em Trilhas - WorldCamp</title>
@@ -107,20 +123,16 @@ $db->checkLogin();
       <!-- HERO -->
       <section class="hero-trilhas mb-5">
         <h1>Inscreva-se nas Trilhas WorldCamp</h1>
-        <p>
-          Escolha uma das trilhas guiadas, prepare a mochila e venha viver uma
-          experiência de aventura com segurança, natureza e muita história pra contar.
+        <p class="lead">
+          Cada trilha, uma história. Escolha a sua e preencha o mini-formulário direto no card da trilha desejada.
         </p>
-        <a href="#form-inscricao" class="btn btn-lg btn-success mt-3">
-          <i class="fa-solid fa-person-hiking"></i> Fazer inscrição
-        </a>
       </section>
 
-      <!-- TRILHAS DISPONÍVEIS -->
-      <h1 class="Principal">Nossas trilhas</h1>
+      <!-- TRILHAS COM FORMULÁRIO PRÓPRIO -->
+      <h1 class="Principal">Nossas Trilhas</h1>
 
       <section class="row g-4 mb-5">
-        <!-- Trilha 1 -->
+        <!-- Trilha Vale Verde -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -132,18 +144,59 @@ $db->checkLogin();
               <span class="badge bg-success badge-nivel mb-2">Nível: Fácil</span>
               <h4 class="card-title">Trilha do Vale Verde</h4>
               <p class="card-text">
-                Caminhada leve por campos abertos e riachos rasos. Ideal para
-                iniciantes, famílias e grupos escolares.
+                Caminhada leve por campos abertos e riachos rasos. Ideal para iniciantes,
+                famílias e grupos escolares.
               </p>
-              <p class="mb-0">
-                <strong>Duração média:</strong> 1h30<br />
+              <p class="mb-2">
+                <strong>Duração:</strong> 1h30<br />
                 <strong>Idade mínima:</strong> 7 anos
               </p>
+
+              <!-- Formulário próprio da trilha Vale Verde -->
+              <form action="#" method="post">
+                <input type="hidden" name="trilha" value="vale_verde" />
+                <div class="mb-2">
+                  <label for="nome_vale" class="form-label">Nome completo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nome_vale"
+                    name="nome"
+                    required
+                  />
+                </div>
+
+                <div class="mb-2">
+                  <label for="email_vale" class="form-label">E-mail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email_vale"
+                    name="email"
+                    required
+                  />
+                </div>
+
+                <div class="mb-2">
+                  <label for="data_vale" class="form-label">Data desejada</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="data_vale"
+                    name="data_trilha"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Vale Verde
+                </button>
+              </form>
             </div>
           </div>
         </div>
 
-        <!-- Trilha 2 -->
+        <!-- Trilha Pedra Clara -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -157,18 +210,59 @@ $db->checkLogin();
               >
               <h4 class="card-title">Trilha da Pedra Clara</h4>
               <p class="card-text">
-                Terreno variado, com subidas moderadas e mirantes naturais.
-                Perfeita para quem já tem algum contato com trilhas.
+                Terreno variado com subidas moderadas e mirantes naturais. Ideal para quem já tem
+                alguma experiência em trilhas.
               </p>
-              <p class="mb-0">
-                <strong>Duração média:</strong> 2h30<br />
+              <p class="mb-2">
+                <strong>Duração:</strong> 2h30<br />
                 <strong>Idade mínima:</strong> 12 anos
               </p>
+
+              <!-- Formulário próprio da trilha Pedra Clara -->
+              <form action="#" method="post">
+                <input type="hidden" name="trilha" value="pedra_clara" />
+                <div class="mb-2">
+                  <label for="nome_pedra" class="form-label">Nome completo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nome_pedra"
+                    name="nome"
+                    required
+                  />
+                </div>
+
+                <div class="mb-2">
+                  <label for="email_pedra" class="form-label">E-mail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email_pedra"
+                    name="email"
+                    required
+                  />
+                </div>
+
+                <div class="mb-2">
+                  <label for="data_pedra" class="form-label">Data desejada</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="data_pedra"
+                    name="data_trilha"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha da Pedra Clara
+                </button>
+              </form>
             </div>
           </div>
         </div>
 
-        <!-- Trilha 3 -->
+        <!-- Trilha Pico Nebuloso -->
         <div class="col-md-4">
           <div class="card shadow-sm card-trilha h-100">
             <img
@@ -180,128 +274,55 @@ $db->checkLogin();
               <span class="badge bg-danger badge-nivel mb-2">Nível: Avançado</span>
               <h4 class="card-title">Trilha do Pico Nebuloso</h4>
               <p class="card-text">
-                Desafio intenso com subidas íngremes e terrenos rochosos. Acompanhada
-                por instrutores experientes.
+                Subidas intensas, terreno rochoso e clima variável. Trilha guiada por
+                instrutores experientes.
               </p>
-              <p class="mb-0">
-                <strong>Duração média:</strong> 4h<br />
+              <p class="mb-2">
+                <strong>Duração:</strong> 4h<br />
                 <strong>Idade mínima:</strong> 16 anos
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- FORMULÁRIO DE INSCRIÇÃO (APENAS HTML) -->
-      <section class="mb-5" id="form-inscricao">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h3 class="mb-3">
-              <i class="fa-solid fa-clipboard-list"></i> Formulário de inscrição
-            </h3>
-            <p class="text-muted">
-              Preencha seus dados para realizar a inscrição na trilha desejada.
-              (Por enquanto é só visual, sem envio para banco de dados.)
-            </p>
-
-            <!-- Somente HTML, sem backend -->
-            <form action="#" method="post">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="nome" class="form-label">Nome completo</label>
+              <!-- Formulário próprio da trilha Pico Nebuloso -->
+              <form action="#" method="post">
+                <input type="hidden" name="trilha" value="pico_nebuloso" />
+                <div class="mb-2">
+                  <label for="nome_pico" class="form-label">Nome completo</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nome"
+                    id="nome_pico"
                     name="nome"
                     required
                   />
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="email" class="form-label">E-mail</label>
+
+                <div class="mb-2">
+                  <label for="email_pico" class="form-label">E-mail</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="email"
+                    id="email_pico"
                     name="email"
                     required
                   />
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="telefone" class="form-label">Telefone</label>
+                <div class="mb-2">
+                  <label for="data_pico" class="form-label">Data desejada</label>
                   <input
-                    type="tel"
+                    type="date"
                     class="form-control"
-                    id="telefone"
-                    name="telefone"
-                    placeholder="(DDD) 90000-0000"
-                  />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="idade" class="form-label">Idade</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="idade"
-                    name="idade"
-                    min="7"
+                    id="data_pico"
+                    name="data_trilha"
                     required
                   />
                 </div>
-              </div>
 
-              <div class="mb-3">
-                <label for="trilha" class="form-label">Trilha desejada</label>
-                <select
-                  class="form-select"
-                  id="trilha"
-                  name="trilha"
-                  required
-                >
-                  <option value="">Selecione uma trilha</option>
-                  <option value="vale_verde">
-                    Trilha do Vale Verde (Fácil)
-                  </option>
-                  <option value="pedra_clara">
-                    Trilha da Pedra Clara (Intermediária)
-                  </option>
-                  <option value="pico_nebuloso">
-                    Trilha do Pico Nebuloso (Avançada)
-                  </option>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label for="data_trilha" class="form-label">Data desejada</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="data_trilha"
-                  name="data_trilha"
-                  required
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="observacoes" class="form-label"
-                  >Observações (opcional)</label
-                >
-                <textarea
-                  class="form-control"
-                  id="observacoes"
-                  name="observacoes"
-                  rows="3"
-                  placeholder="Ex.: experiência em trilhas, restrições físicas, dúvidas..."
-                ></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-success w-100">
-                <i class="fa-solid fa-paper-plane"></i> Enviar inscrição
-              </button>
-            </form>
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="fa-solid fa-paper-plane"></i> Inscrever na Trilha do Pico Nebuloso
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -317,3 +338,4 @@ $db->checkLogin();
 include '../footer.php';
 
 ?>
+
