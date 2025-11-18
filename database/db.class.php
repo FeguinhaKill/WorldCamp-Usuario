@@ -8,6 +8,13 @@ class db
     private $password = "";
     private $port = "3306";
     private $dbname = "WorldCamp";
+    public function query($sql, $params = [])
+    {
+        $conn = $this->conn();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     function conn()
     {
@@ -32,7 +39,7 @@ class db
     public function store($dados)
     {
         $conn = $this->conn();
-        
+
 
         $sql = "INSERT INTO `listausuarios` (`Nome`, `Email`, `cpf`, `telefone`, `senha`) 
         VALUES (?, ?, ?, ?, ?);";

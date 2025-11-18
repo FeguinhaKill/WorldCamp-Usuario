@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS `agendardormitorio` (
   `check-out` date NOT NULL,
   `dormitorio` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.agendardormitorio: ~0 rows (aproximadamente)
-INSERT INTO `agendardormitorio` ( `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
-	( 'FELIPE', '2025-11-17', '2025-11-18', 1);
+INSERT INTO `agendardormitorio` (`Id`, `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
+	(2, 'FELIPE', '2025-11-17', '2025-11-18', 1);
 
 -- Copiando estrutura para tabela worldcamp.agendartrilhas
 CREATE TABLE IF NOT EXISTS `agendartrilhas` (
@@ -40,11 +40,23 @@ CREATE TABLE IF NOT EXISTS `agendartrilhas` (
   `data-realização` date NOT NULL,
   `trilha` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 
 -- Copiando dados para a tabela worldcamp.agendartrilhas: ~0 rows (aproximadamente)
-INSERT INTO `agendartrilhas` ( `nome-usuario`, `data-realização`, `trilha`) VALUES
-	('FELIPE', '2025-11-17', 1);
+INSERT INTO `agendartrilhas` (`Id`, `nome-usuario`, `data-realização`, `trilha`) VALUES
+	(2, 'FELIPE', '2025-11-17', 1);
+
+-- Copiando estrutura para tabela worldcamp.compras_realizadas
+CREATE TABLE IF NOT EXISTS `compras_realizadas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `nome_produto` varchar(255) NOT NULL,
+  `quantidade` int NOT NULL,
+  `data_compra` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela worldcamp.compras_realizadas: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela worldcamp.listausuarios
 CREATE TABLE IF NOT EXISTS `listausuarios` (
@@ -55,23 +67,61 @@ CREATE TABLE IF NOT EXISTS `listausuarios` (
   `telefone` text NOT NULL,
   `senha` text NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.listausuarios: ~0 rows (aproximadamente)
-INSERT INTO `listausuarios` ( `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
-	( 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
+INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
+	(3, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
 
 -- Copiando estrutura para tabela worldcamp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `Nome` text,
-  `quantidade` int DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.produtos: ~0 rows (aproximadamente)
-INSERT INTO `produtos` ( `Nome`, `quantidade`) VALUES
-	( 'camiseta', 50);
+-- Copiando dados para a tabela worldcamp.produtos: ~6 rows (aproximadamente)
+INSERT INTO `produtos` (`id`, `name`, `category`, `price`, `image`) VALUES
+	(1, 'Garrafa Térmica WorldCamp', 'Acessório', 119.00, '../../imagens/garrafaLoja.png'),
+	(2, 'Botas de Chuva Impermeáveis', 'Calçado', 249.00, '../../imagens/botaLoja.png'),
+	(3, 'Jaqueta School WorldCamp', 'Roupa', 329.00, '../../imagens/jaquetaLoja.png'),
+	(4, 'Chapéu de Acampamento', 'Acessório', 79.90, '../../imagens/chapeuLoja.png'),
+	(5, 'Camiseta Personalizada WorldCamp', 'Roupa', 89.90, '../../imagens/camisetaLoja.png'),
+	(6, 'Kit Aleatório WorldCamp', 'Kit', 159.00, '../../imagens/kitLoja.png');
+
+-- Copiando estrutura para tabela worldcamp.produtos_descricao
+CREATE TABLE IF NOT EXISTS `produtos_descricao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int NOT NULL,
+  `descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `produtos_descricao_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `produtos` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela worldcamp.produtos_descricao: ~18 rows (aproximadamente)
+INSERT INTO `produtos_descricao` (`id`, `product_id`, `descricao`) VALUES
+	(1, 1, 'Conserva a temperatura por até 12h'),
+	(2, 1, 'Corpo em aço inoxidável'),
+	(3, 1, 'Ideal para trilhas longas'),
+	(4, 2, 'Material resistente à água'),
+	(5, 2, 'Solado antiderrapante'),
+	(6, 2, 'Perfeitas para terrenos molhados'),
+	(7, 3, 'Proteção contra vento e chuva'),
+	(8, 3, 'Tecido térmico leve'),
+	(9, 3, 'Visual oficial do acampamento'),
+	(10, 4, 'Proteção contra o sol'),
+	(11, 4, 'Ajuste com cordão'),
+	(12, 4, 'Estilo aventureiro WorldCamp'),
+	(13, 5, 'Nome, turma ou frase personalizada'),
+	(14, 5, 'Tecido leve e respirável'),
+	(15, 5, 'Lembrança oficial do acampamento'),
+	(16, 6, 'Contém de 3 a 5 itens surpresa'),
+	(17, 6, 'Selecionados pela equipe WorldCamp'),
+	(18, 6, 'Perfeito para quem gosta de novidade');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

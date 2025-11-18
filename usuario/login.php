@@ -1,5 +1,5 @@
 <?php
-include '../db.class.php';
+include '../database/db.class.php';
 $db = new db();
 
 $dados = $db->all();

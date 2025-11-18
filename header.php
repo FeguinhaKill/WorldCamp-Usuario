@@ -16,7 +16,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 $showMenu = !in_array($currentPage, $hiddenPage);
 
 if ($showMenu) {
-    include_once '../menu.php';
+    include_once '../../menu.php';
 }
 ?>
 
