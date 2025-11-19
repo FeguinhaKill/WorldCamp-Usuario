@@ -229,6 +229,8 @@ foreach ($produtosBD as $p) {
 
     }
     function removerDoCarrinho(nome) {
+      confirmation = confirm(`Tem certeza que deseja remover ${nome} do carrinho?`);
+      if (!confirmation) return;
       const index = carrinho.findIndex(item => item.nome === nome);
       if (index !== -1) {
         carrinho.splice(index, 1);
