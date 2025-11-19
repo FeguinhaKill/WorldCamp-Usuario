@@ -5,76 +5,12 @@ $db = new db();
 
 $db->checkLogin();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao"] === "finalizar") {
-  $json = file_get_contents("php://input");
-  $carrinho = json_decode($json, true);
-
-  if (!$carrinho) {
-    http_response_code(400);
-    echo "Carrinho inválido";
-    exit;
-  }
-
-  if (!isset($_SESSION["nome"])) {
-    http_response_code(401);
-    echo "Usuário não logado";
-    exit;
-  }
-
-  $nome_usuario = $_SESSION["nome"];
-  $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
-
-  $db->query("
-        INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
-        VALUES (?, ?, NOW())
-    ", [
-    $nome_usuario,
-    $produtos_json
-  ]);
-
-  echo "OK";
-  exit;
-  
-}
 
 include '../../header.php';
-$comprasBD = $db->query("SELECT * FROM compras_realizadas ORDER BY data_compra DESC");
-
-$compras = [];
-
-foreach ($comprasBD as $c) {
-  $compras[] = [
-    'id' => $c['id'],
-    'nome_usuario' => $c['nome_usuario'],
-    'data' => $c['data_compra'],
-    'itens' => json_decode($c['produtos_json'], true)
-  ];
-}
+$produtos = $db->getProdutos();
+$compras = $db->getCompras();
 
 
-
-
-$produtosBD = $db->query("SELECT * FROM produtos");
-
-$produtos = [];
-
-foreach ($produtosBD as $p) {
-  $descricaosBD = $db->query("SELECT descricao FROM produtos_descricao WHERE product_id = ?", [$p['id']]);
-
-  $listaDescricoes = [];
-  foreach ($descricaosBD as $f) {
-    $listaDescricoes[] = $f['descricao'];
-  }
-
-  $produtos[$p['id']] = [
-    'id' => $p['id'],
-    'nome' => $p['nome'],
-    'categoria' => $p['categoria'],
-    'preco' => $p['preco'],
-    'imagem' => $p['imagem_path'],
-    'descricaos' => $listaDescricoes
-  ];
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

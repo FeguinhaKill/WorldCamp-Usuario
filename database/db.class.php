@@ -72,12 +72,9 @@ class db
     public function find($id)
     {
         $conn = $this->conn();
-
         $sql = "SELECT * FROM listausuarios WHERE id = ?";
-
         $st = $conn->prepare($sql);
         $st->execute([$id]);
-
         return $st->fetchObject();
     }
     public function update($dados)
@@ -103,4 +100,63 @@ class db
             header('Location: ../login.php?error=Sessao Expirada!');
         }
     }
+    public function getCompras()
+{
+    $conn = $this->conn();
+
+    $sql = "SELECT * FROM compras_realizadas ORDER BY data_compra DESC";
+    $st = $conn->prepare($sql);
+    $st->execute();
+
+    $comprasBD = $st->fetchAll(PDO::FETCH_ASSOC);
+
+    $compras = [];
+
+    foreach ($comprasBD as $c) {
+        $compras[] = [
+            'id' => $c['id'],
+            'nome_usuario' => $c['nome_usuario'],
+            'data' => $c['data_compra'],
+            'itens' => json_decode($c['produtos_json'], true)
+        ];
+    }
+
+    return $compras;
 }
+public function getProdutos()
+{
+    $conn = $this->conn();
+
+    $sql = "SELECT * FROM produtos";
+    $st = $conn->prepare($sql);
+    $st->execute();
+    $produtosBD = $st->fetchAll(PDO::FETCH_ASSOC);
+
+    $produtos = [];
+
+    foreach ($produtosBD as $p) {
+        $sqlDescricao = "SELECT descricao FROM produtos_descricao WHERE product_id = ?";
+        $stDesc = $conn->prepare($sqlDescricao);
+        $stDesc->execute([$p['id']]);
+        $descricaosBD = $stDesc->fetchAll(PDO::FETCH_ASSOC);
+
+        $listaDescricoes = [];
+        foreach ($descricaosBD as $f) {
+            $listaDescricoes[] = $f['descricao'];
+        }
+        $produtos[$p['id']] = [
+            'id' => $p['id'],
+            'nome' => $p['nome'],
+            'categoria' => $p['categoria'],
+            'preco' => $p['preco'],
+            'imagem' => $p['imagem_path'],
+            'descricaos' => $listaDescricoes
+        ];
+    }
+
+    return $produtos;
+}
+
+
+}
+?>  
