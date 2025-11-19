@@ -49,14 +49,18 @@ INSERT INTO `agendartrilhas` (`Id`, `nome-usuario`, `data-realização`, `trilha
 -- Copiando estrutura para tabela worldcamp.compras_realizadas
 CREATE TABLE IF NOT EXISTS `compras_realizadas` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `nome_produto` varchar(255) NOT NULL,
-  `quantidade` int NOT NULL,
+  `nome_usuario` varchar(50) NOT NULL DEFAULT '',
+  `produtos_json` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `data_compra` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.compras_realizadas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.compras_realizadas: ~4 rows (aproximadamente)
+INSERT INTO `compras_realizadas` (`id`, `nome_usuario`, `produtos_json`, `data_compra`) VALUES
+	(1, 'Felipe', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":1}]', '2025-11-19 10:03:01'),
+	(2, 'Felipe', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":5},{"nome":"Jaqueta School WorldCamp","preco":"329.00","quantidade":54}]', '2025-11-19 10:03:32'),
+	(3, 'Alanbidanos', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":3}]', '2025-11-19 10:13:12'),
+	(4, 'Alanbidanos', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":5}]', '2025-11-19 10:19:48');
 
 -- Copiando estrutura para tabela worldcamp.listausuarios
 CREATE TABLE IF NOT EXISTS `listausuarios` (
@@ -67,24 +71,25 @@ CREATE TABLE IF NOT EXISTS `listausuarios` (
   `telefone` text NOT NULL,
   `senha` text NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.listausuarios: ~0 rows (aproximadamente)
 INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
-	(3, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q');
+	(3, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q'),
+	(4, 'Alanbidanos', 'alanbidanos@gmail.com', '123-456-789-00', '49 9 1234-5678', '123w');
 
 -- Copiando estrutura para tabela worldcamp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `category` varchar(100) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `categoria` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `imagem_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela worldcamp.produtos: ~6 rows (aproximadamente)
-INSERT INTO `produtos` (`id`, `name`, `category`, `price`, `image`) VALUES
+INSERT INTO `produtos` (`id`, `nome`, `categoria`, `preco`, `imagem_path`) VALUES
 	(1, 'Garrafa Térmica WorldCamp', 'Acessório', 119.00, '../../imagens/garrafaLoja.png'),
 	(2, 'Botas de Chuva Impermeáveis', 'Calçado', 249.00, '../../imagens/botaLoja.png'),
 	(3, 'Jaqueta School WorldCamp', 'Roupa', 329.00, '../../imagens/jaquetaLoja.png'),
