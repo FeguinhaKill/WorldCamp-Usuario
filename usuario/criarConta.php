@@ -1,6 +1,6 @@
 <?php
 include '../header.php';
-include '../db.class.php';
+include '../database/db.class.php';
 $db = new db();
 if (!empty($_POST)) {
 
