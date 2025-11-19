@@ -100,6 +100,7 @@ $compras = $db->getCompras();
 <body>
   <script>
     const carrinho = [];
+
     function addCarrinho(botao, nome, preco) {
       const noCarrinho = carrinho.find(item => item.nome === nome);
       const quantidade = botao.parentElement.querySelector(".quantidade").value;
@@ -107,12 +108,17 @@ $compras = $db->getCompras();
       if (noCarrinho) {
         noCarrinho.quantidade += parseInt(quantidade);
       } else {
-        carrinho.push({ nome, preco, quantidade: parseInt(quantidade) });
+        carrinho.push({
+          nome,
+          preco,
+          quantidade: parseInt(quantidade)
+        });
       }
 
       alert(`Adicionado ao carrinho: ${nome} (Quantidade: ${quantidade}) - Preço unitário: R$ ${preco}`);
 
     }
+
     function mostrarCarrinho() {
       const container = document.getElementById("carrinhoConteudo");
 
@@ -162,6 +168,7 @@ $compras = $db->getCompras();
       modal.show();
 
     }
+
     function removerDoCarrinho(nome) {
       confirmation = confirm(`Tem certeza que deseja remover ${nome} do carrinho?`);
       if (!confirmation) return;
@@ -171,6 +178,7 @@ $compras = $db->getCompras();
         mostrarCarrinho();
       }
     }
+
     function finalizarCompra() {
       if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -178,17 +186,19 @@ $compras = $db->getCompras();
       }
 
       fetch("lojaProdutos.php?acao=finalizar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(carrinho)
-      })
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(carrinho)
+        })
         .then(res => res.text())
         .then(res => {
           if (res === "OK") {
             alert("Compra finalizada e registrada no banco!");
 
             carrinho.length = 0;
-            mostrarCarrinho(); // atualizar modal
+            mostrarCarrinho();
 
             const modalEl = document.getElementById("carrinhoModal");
             const modal = bootstrap.Modal.getInstance(modalEl);
@@ -201,23 +211,22 @@ $compras = $db->getCompras();
           alert("Erro no envio: " + err);
         });
     }
-function atualizarQuantidade(nome, novaQtd) {
-        novaQtd = parseInt(novaQtd);
 
-        if (novaQtd <= 0 || isNaN(novaQtd)) {
-            alert("Quantidade inválida");
-            return;
-        }
+    function atualizarQuantidade(nome, novaQtd) {
+      novaQtd = parseInt(novaQtd);
 
-        const item = carrinho.find(p => p.nome === nome);
-        if (item) {
-            item.quantidade = novaQtd;
-        }
+      if (novaQtd <= 0 || isNaN(novaQtd)) {
+        alert("Quantidade inválida");
+        return;
+      }
 
-        mostrarCarrinho();
+      const item = carrinho.find(p => p.nome === nome);
+      if (item) {
+        item.quantidade = novaQtd;
+      }
+
+      mostrarCarrinho();
     }
-
-
   </script>
   <main class="container my-5">
 
