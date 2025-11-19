@@ -5,7 +5,6 @@ $db = new db();
 
 $db->checkLogin();
 
-
 include '../../header.php';
 $produtos = $db->getProdutos();
 $compras = $db->getCompras();
