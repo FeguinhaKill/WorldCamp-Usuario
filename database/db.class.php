@@ -114,6 +114,21 @@ class db
             $dados['dormitorio'],
         ]);
     }
+    public function storeTrilha($dados)
+    {
+        $conn = $this->conn();
+
+        $sql = "INSERT INTO `agendartrilhas` 
+                (`nome_usuario`, `data_realizacao`, `numero_acompanhantes`) 
+                VALUES (?, ?, ?)";
+
+        $st = $conn->prepare($sql);
+        $st->execute([
+            $dados['nome_usuario'],
+            $dados['data_realizacao'],
+            $dados['numero_acompanhantes'],
+        ]);
+    }
 
     public function updateReserva($dados)
     {
@@ -135,6 +150,26 @@ class db
             $dados['Id']
         ]);
     }
+    public function updateTrilha($dados)
+    {
+        $conn = $this->conn();
+
+        $sql = "UPDATE `agendardormitorio`
+                   SET `nome_usuario` = ?, 
+                       `check-in` = ?, 
+                       `check-out` = ?, 
+                       `dormitorio` = ?
+                 WHERE Id = ?";
+
+        $st = $conn->prepare($sql);
+        $st->execute([
+            $dados['nome_usuario'],
+            $dados['check-in'],
+            $dados['check-out'],
+            $dados['dormitorio'],
+            $dados['Id']
+        ]);
+    }
 
     public function allReserva()
     {
@@ -144,6 +179,7 @@ class db
         $st->execute();
         return $st->fetchAll(PDO::FETCH_CLASS);
     }
+
 
     public function destroyReserva($id)
     {
