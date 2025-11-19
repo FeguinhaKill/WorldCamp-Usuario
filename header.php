@@ -16,9 +16,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 $showMenu = !in_array($currentPage, $hiddenPage);
 
 if ($showMenu) {
-    include_once '../../menu.php';
-}
-?>
+        $page = basename($_SERVER['PHP_SELF']); if ($page === 'dashboard.php') { 
+            include_once '../menu.php';
+            ?>
+      <?php } else  {
+        include_once '../../menu.php'; ?>
+
+      <?php } 
+      }?>
 
     <div class="container mt-4">
         <div class="row">

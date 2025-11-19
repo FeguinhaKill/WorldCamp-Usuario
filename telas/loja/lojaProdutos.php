@@ -1,8 +1,8 @@
 <?php
 session_start();
-/*
+
 include '../../header.php';
-*/
+
 include '../../database/db.class.php';
 $db = new db();
 
@@ -22,10 +22,10 @@ foreach ($produtosBD as $p) {
 
     $produtos[$p['id']] = [
         'id' => $p['id'],
-        'name' => $p['name'],
-        'category' => $p['category'],
-        'price' => $p['price'],
-        'image' => $p['image'],
+        'nome' => $p['nome'],
+        'categoria' => $p['categoria'],
+        'preco' => $p['preco'],
+        'imagem' => $p['imagem_path'],
         'descricaos' => $listaDescricoes
     ];
 }
@@ -87,6 +87,17 @@ foreach ($produtosBD as $p) {
   </head>
 
   <body>
+    <script>
+      function setCookie(nome, valor, quantidade){
+        if (document.cookie.includes(nome)) {
+          document.cookie = nome + "=" + valor + ";" + (quantidade + 1) + ";path=/";
+        }else{
+          quantidade = 1;
+        }
+        document.cookie = nome + "=" + valor + ";" + quantidade + ";path=/";
+        console.log(document.cookie);
+      }
+    </script>
     <main class="container my-5">
 
       <section class="hero mb-5">
@@ -94,17 +105,17 @@ foreach ($produtosBD as $p) {
         <p>Explore nossa linha de produtos WorldCamp: roupas, calçados e acessórios pensados para experiências de acampamento inesquecíveis.</p>
       </section>
 
-      <h1 class="Principal" id="produtos">Produtos em Destaque</h1>
+      <h1 class="Principal">Produtos em Destaque</h1>
 
       <div class="row mb-4">
       <?php foreach ($produtos as $p): ?>
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="<?= $p['image'] ?>" alt="<?= $p['name'] ?>" class="card-img-top" />
+            <img src="<?= $p['imagem'] ?>" alt="<?= $p['nome'] ?>" class="card-img-top" />
 
             <div class="card-body">
-              <span class="badge bg-success mb-2"><?= $p['category'] ?></span>
-              <h4 class="card-title"><?= $p['name'] ?></h4>
+              <span class="badge bg-success mb-2"><?= $p['categoria'] ?></span>
+              <h4 class="card-title"><?= $p['nome'] ?></h4>
 
               <ul>
                 <?php foreach ($p['descricaos'] as $f): ?>
@@ -112,9 +123,9 @@ foreach ($produtosBD as $p) {
                 <?php endforeach; ?>
               </ul>
 
-              <p><strong>R$ <?= number_format($p['price'], 2, ',', '.') ?></strong></p>
+              <p><strong>R$ <?= number_format($p['preco'], 2, ',', '.') ?></strong></p>
 
-              <a href="#" class="btn btn-success w-100">
+              <a onclick="setCookie('<?= $p['nome'] ?>', '<?= $p['preco'] ?>','4')" class="btn btn-success w-100">
                 <i class="fa-solid fa-cart-plus"></i> Comprar
               </a>
             </div>
@@ -122,7 +133,6 @@ foreach ($produtosBD as $p) {
         </div>
       <?php endforeach; ?>
       </div>
-
     </main>
 
     <?php include '../../footer.php'; ?>

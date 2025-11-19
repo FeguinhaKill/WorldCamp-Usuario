@@ -21,10 +21,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     </div>
   </div>
+  <?php $page = basename($_SERVER['PHP_SELF']); if ($page === 'dashboard.php') { ?> 
+    <div class="col text-end">
+      <a href="../usuario/login.php" class="btn btn-danger m-2" <?php session_abort() ?>>Sair</a>
+    </div>
+  <?php } else  { ?>
     <div class="col text-end">
       <a href="../../usuario/login.php" class="btn btn-danger m-2" <?php session_abort() ?>>Sair</a>
     </div>
+  <?php } ?>
     <div class="col text-end">
       <button type="button" class="btn btn-secondary m-2" onclick="history.back();">Voltar</button>
     </div>
+    
 </nav>
