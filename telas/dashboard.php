@@ -21,20 +21,19 @@ $db->checkLogin();
                 </div>
             </div>
         </div>
-
         
         <div class="col-md-4">
             <div class="background-img-reservas">
                 <div class="card-body">
-                        <a href="./reservas/Reservas.php" class="btn btn-success mt-2">Fazer Reservas</a>
-                    </div>
+                    <a href="./reservas/Reservas.php" class="btn btn-success mt-2">Fazer Reservas</a>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="background-img-trilhas">
                 <div class="card-body">
-                    <a href="./trilhas/agendarTrilhas.php" class="btn btn-info mt-2">Agendar Trilhas</a>
+                    <a href="./trilhas/trilhasForm.php" class="btn btn-info mt-2">Agendar Trilhas</a>
                 </div>
             </div>
         </div>
@@ -44,3 +43,9 @@ $db->checkLogin();
 <?php
 include '../footer.php';
 ?>
+
+
+
+
+
+
