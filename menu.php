@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
   <div class="container-fluid">
 
       <?php  $page = basename($_SERVER['PHP_SELF']); if ($page === 'dashboard.php') { ?>

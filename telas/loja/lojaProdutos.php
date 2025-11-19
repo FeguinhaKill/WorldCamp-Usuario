@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao
   $nome_usuario = $_SESSION["nome"];
   $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
 
-  // A data já pode ser salva automaticamente caso sua tabela tenha CURRENT_TIMESTAMP
   $db->query("
         INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
         VALUES (?, ?, NOW())

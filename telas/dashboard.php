@@ -10,9 +10,9 @@ $db->checkLogin();
 <div class="container">
     <Title>Dashboard do Usuário</Title>
     <h1>Dashboard</h1>
-    <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
 </div>
 <div>
+    <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
     <div class="row g-3">
         <div class="col-md-4">
             <div class="background-img-loja">
