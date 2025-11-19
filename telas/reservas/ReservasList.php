@@ -3,7 +3,7 @@ session_start();
 include '../../header.php';
 include '../../database/db.class.php';
 
-$db = new db('agendardormitorio');
+$db = new db();
 $db->checkLogin();
 
 if (!empty($_GET['Id'])) {

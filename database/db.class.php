@@ -115,20 +115,21 @@ class db
         ]);
     }
     public function storeTrilha($dados)
-    {
-        $conn = $this->conn();
+{
+    $conn = $this->conn();
 
-        $sql = "INSERT INTO `agendartrilhas` 
-                (`nome_usuario`, `data_realizacao`, `numero_acompanhantes`) 
-                VALUES (?, ?, ?)";
+    $sql = "INSERT INTO `agendartrilhas` 
+            (`nome_usuario`, `trilha`, `data_realizacao`, `numero_acompanhantes`) 
+            VALUES (?, ?, ?, ?)";
 
-        $st = $conn->prepare($sql);
-        $st->execute([
-            $dados['nome_usuario'],
-            $dados['data_realizacao'],
-            $dados['numero_acompanhantes'],
-        ]);
-    }
+    $st = $conn->prepare($sql);
+    $st->execute([
+        $dados['nome_usuario'],
+        $dados['trilha'],
+        $dados['data_realizacao'],
+        $dados['numero_acompanhantes'],
+    ]);
+}
 
     public function updateReserva($dados)
     {
@@ -151,25 +152,26 @@ class db
         ]);
     }
     public function updateTrilha($dados)
-    {
-        $conn = $this->conn();
+{
+    $conn = $this->conn();
 
-        $sql = "UPDATE `agendardormitorio`
-                   SET `nome_usuario` = ?, 
-                       `check-in` = ?, 
-                       `check-out` = ?, 
-                       `dormitorio` = ?
-                 WHERE Id = ?";
+    $sql = "UPDATE `agendartrilhas`
+               SET `nome_usuario` = ?, 
+                   `trilha` = ?, 
+                   `data_realizacao` = ?, 
+                   `numero_acompanhantes` = ?
+             WHERE Id = ?";
 
-        $st = $conn->prepare($sql);
-        $st->execute([
-            $dados['nome_usuario'],
-            $dados['check-in'],
-            $dados['check-out'],
-            $dados['dormitorio'],
-            $dados['Id']
-        ]);
-    }
+    $st = $conn->prepare($sql);
+    $st->execute([
+        $dados['nome_usuario'],
+        $dados['trilha'],
+        $dados['data_realizacao'],
+        $dados['numero_acompanhantes'],
+        $dados['Id']
+    ]);
+}
+
 
     public function allReserva()
     {
@@ -204,7 +206,7 @@ class db
     {
         if (empty($_SESSION['nome'])) {
             session_destroy();
-            header('Location: ../login.php?error=Sessao Expirada!');
+            header('Location: ../localhost/WorldCamp-Usuario/usuario/login.php');
         }
     }
 
@@ -265,5 +267,57 @@ class db
 
         return $produtos;
     }
+    public function searchTrilha($dados)
+{
+    $tipo  = $dados["tipo"];  
+    $valor = $dados["valor"]; 
+    $colunasValidas = ["nome", "datarealizacao", "trilha", "numeroacompanhantes"];
+    if (!in_array($tipo, $colunasValidas)) {
+        return [];
+    }
+
+    $sql = "SELECT * FROM agendartrilhas WHERE $tipo LIKE :valor ORDER BY Id DESC";
+
+    $stmt = $this->conn()->prepare($sql); 
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+// listar todas as trilhas
+public function allTrilhas()
+{
+    $conn = $this->conn();
+    $sql = "SELECT * FROM agendartrilhas ORDER BY Id DESC";
+    $st = $conn->prepare($sql);
+    $st->execute();
+    return $st->fetchAll(PDO::FETCH_OBJ);
+}
+
+public function findTrilha($Id)
+{
+    $conn = $this->conn();
+    $sql = "SELECT * FROM agendartrilhas WHERE Id = :Id";
+    $st = $conn->prepare($sql);
+    $st->bindValue(':Id', $Id, PDO::PARAM_INT);
+    $st->execute();
+    return $st->fetch(PDO::FETCH_OBJ);
+}
+
+// excluir por Id
+public function deleteTrilha($Id)
+{
+    $conn = $this->conn();
+    $sql = "DELETE FROM agendartrilhas WHERE Id = :Id";
+    $st = $conn->prepare($sql);
+    $st->bindValue(':Id', $Id, PDO::PARAM_INT);
+    return $st->execute();
+}
+public function deleteCompra($id) {
+    $sql = "DELETE FROM compras_realizadas WHERE id = ?";
+    $stmt = $this->conn()->prepare($sql);
+    return $stmt->execute([$id]);
+}
+
+
 }
 ?>

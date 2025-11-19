@@ -17,7 +17,7 @@ $db->checkLogin();
         <div class="col-md-4">
             <div class="background-img-loja">
                 <div class="card-body">
-                    <a href="./loja/lojaProdutos.php" class="btn btn-primary mt-2">Ir para Loja</a>
+                    <a href="./loja/lojaForm.php" class="btn btn-primary mt-2">Ir para Loja</a>
                 </div>
             </div>
         </div>

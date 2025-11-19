@@ -1,18 +1,19 @@
 <?php
-include '../header.php';
-include '../database/db.class.php';
+session_start();
+include '../../header.php';
+include '../../database/db.class.php';
 
-$db = new db('agendartrilhas');
+$db = new db();
 $db->checkLogin();
 
-if (!empty($_GET['id'])) {
-    $db->destroy($_GET['id']);
+if (!empty($_GET['Id'])) {
+    $db->deleteTrilha($_GET['Id']);
 }
 
 if (!empty($_POST)) {
-    $dados = $db->search($_POST);
+    $agendamento = $db->searchTrilha($_POST);
 } else {
-    $dados = $db->all();
+    $agendamento = $db->allTrilhas();
 }
 ?>
 
@@ -23,7 +24,7 @@ if (!empty($_POST)) {
         padding: 2rem 2.5rem;
         border-radius: 12px;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
     }
 
     .hero-trilhas-list h2 {
@@ -79,16 +80,15 @@ if (!empty($_POST)) {
                 <label class="form-label">Campo</label>
                 <select name="tipo" class="form-select">
                     <option value="nome">Nome</option>
-                    <option value="email">Email</option>
+                    <option value="data_realizacao">Data de realizacao</option>
                     <option value="trilha">Trilha</option>
-                    <option value="data_trilha">Data da Trilha</option>
+                    <option value="numero_acompanhantes">Numero de Acompanhantes</option>
                 </select>
             </div>
 
             <div class="col-md-5">
                 <label class="form-label">Valor para pesquisa</label>
-                <input type="text" name="valor" placeholder="Digite o termo para buscar"
-                       class="form-control">
+                <input type="text" name="valor" placeholder="Digite o termo para buscar" class="form-control">
             </div>
 
             <div class="col-md-4 d-flex gap-2">
@@ -108,61 +108,35 @@ if (!empty($_POST)) {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Data da Trilha</th>
+                    <th scope="col">Data de realizacao</th>
                     <th scope="col">Trilha</th>
+                    <th scope="col">Numero de Acompanhantes</th>
                     <th scope="col" class="text-center">Editar</th>
                     <th scope="col" class="text-center">Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($dados)) : ?>
-                    <?php foreach ($dados as $item) : ?>
-                        <?php
-                            $nomeTrilha = '';
-                            $badgeClass = '';
-
-                            switch ($item->trilha) {
-                                case 'vale_verde':
-                                    $nomeTrilha = 'Trilha do Vale Verde';
-                                    $badgeClass = 'badge-vale';
-                                    break;
-                                case 'pedra_clara':
-                                    $nomeTrilha = 'Trilha da Pedra Clara';
-                                    $badgeClass = 'badge-pedra';
-                                    break;
-                                case 'pico_nebuloso':
-                                    $nomeTrilha = 'Trilha do Pico Nebuloso';
-                                    $badgeClass = 'badge-pico';
-                                    break;
-                                default:
-                                    $nomeTrilha = $item->trilha;
-                                    $badgeClass = 'badge-secondary';
-                                    break;
-                            }
-                        ?>
+                <?php if (!empty($agendamento)): ?>
+                    <?php foreach ($agendamento as $item): ?>
                         <tr>
-                            <th scope="row"><?= $item->id ?></th>
-                            <td><?= $item->nome ?></td>
-                            <td><?= $item->email ?></td>
-                            <td><?= $item->data_trilha ?></td>
+                            <th scope="row"><?= $item->Id ?></th>
+                            <td><?= $item->nome_usuario ?></td>
+                            <td><?= $item->data_realizacao ?></td>
+                            <td><?= $item->trilha ?></td>
+                            <td><?= $item->numero_acompanhantes ?></td>
                             <td>
-                                <span class="badge badge-trilha <?= $badgeClass ?>">
-                                    <?= $nomeTrilha ?>
-                                </span>
                             </td>
                             <td class="text-center">
-                                <a href="./TrilhasForm.php?id=<?= $item->id ?>">Editar</a>
+                                <a href="./TrilhasForm.php?Id=<?= $item->Id ?>">Editar</a>
                             </td>
                             <td class="text-center">
-                                <a href="./TrilhasList.php?id=<?= $item->id ?>"
-                                   onclick="return confirm('Deseja Excluir esta inscrição?')">
-                                    Excluir
-                                </a>
+                                <a href="./TrilhasList.php?Id=<?= $item->Id ?>"
+                                    onclick="return confirm('Deseja Excluir esta inscrição?')">Excluir</a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                <?php else : ?>
+                <?php else: ?>
                     <tr>
                         <td colspan="7" class="text-center py-4">
                             Nenhuma inscrição encontrada.
@@ -176,6 +150,5 @@ if (!empty($_POST)) {
 </div>
 
 <?php
-include '../footer.php';
+include '../../footer.php';
 ?>
-

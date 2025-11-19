@@ -27,26 +27,32 @@ CREATE TABLE IF NOT EXISTS `agendardormitorio` (
   `check-out` date NOT NULL,
   `dormitorio` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.agendardormitorio: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.agendardormitorio: ~4 rows (aproximadamente)
 INSERT INTO `agendardormitorio` (`Id`, `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
 	(2, 'FELIPE', '2025-11-17', '2025-11-18', 1),
-	(3, 'Alanbidanos', '2025-11-19', '2025-12-19', 4);
+	(3, 'Alanbidanos', '2025-11-19', '2025-12-19', 4),
+	(4, 'Alanbidanos', '2025-11-19', '2025-11-20', 2),
+	(5, 'Alanbidanos', '2025-11-19', '2025-11-20', 2);
 
 -- Copiando estrutura para tabela worldcamp.agendartrilhas
 CREATE TABLE IF NOT EXISTS `agendartrilhas` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `nome_usuario` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `data_realizacao` date NOT NULL,
-  `trilha` int NOT NULL,
+  `trilha` varchar(50) NOT NULL DEFAULT '',
   `numero_acompanhantes` int DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela worldcamp.agendartrilhas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.agendartrilhas: ~1 rows (aproximadamente)
 INSERT INTO `agendartrilhas` (`Id`, `nome_usuario`, `data_realizacao`, `trilha`, `numero_acompanhantes`) VALUES
-	(2, 'FELIPE', '2025-11-17', 1, NULL);
+	(7, 'Alanbidanos', '2025-11-20', 'vale verde', 1),
+	(8, 'Alanbidanos', '2025-11-28', 'pedra clara', 4),
+	(9, 'Alanbidanos', '2025-11-28', 'vale verde', 1),
+	(10, 'Alanbidanos', '2025-11-20', 'pico nebuloso', 1),
+	(11, 'Alanbidanos', '2025-12-04', 'pico nebuloso', 1);
 
 -- Copiando estrutura para tabela worldcamp.compras_realizadas
 CREATE TABLE IF NOT EXISTS `compras_realizadas` (
@@ -57,11 +63,8 @@ CREATE TABLE IF NOT EXISTS `compras_realizadas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.compras_realizadas: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.compras_realizadas: ~7 rows (aproximadamente)
 INSERT INTO `compras_realizadas` (`id`, `nome_usuario`, `produtos_json`, `data_compra`) VALUES
-	(1, 'Felipe', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":1}]', '2025-11-19 10:03:01'),
-	(2, 'Felipe', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":5},{"nome":"Jaqueta School WorldCamp","preco":"329.00","quantidade":54}]', '2025-11-19 10:03:32'),
-	(3, 'Alanbidanos', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":3}]', '2025-11-19 10:13:12'),
 	(4, 'Alanbidanos', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":5}]', '2025-11-19 10:19:48'),
 	(9, 'Felipe', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1338},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":1}]', '2025-11-19 13:20:10'),
 	(10, 'Alanbidanos', '[{"nome":"Camiseta Personalizada WorldCamp","preco":"89.90","quantidade":1},{"nome":"Kit Aleatório WorldCamp","preco":"159.00","quantidade":1}]', '2025-11-19 13:35:27'),
@@ -93,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.produtos: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.produtos: ~0 rows (aproximadamente)
 INSERT INTO `produtos` (`id`, `nome`, `categoria`, `preco`, `imagem_path`) VALUES
 	(1, 'Garrafa Térmica WorldCamp', 'Acessório', 119.00, '../../imagens/garrafaLoja.png'),
 	(2, 'Botas de Chuva Impermeáveis', 'Calçado', 249.00, '../../imagens/botaLoja.png'),
