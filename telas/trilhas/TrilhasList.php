@@ -1,1 +1,181 @@
+<?php
+include '../header.php';
+include '../database/db.class.php';
+
+$db = new db('agendartrilhas');
+$db->checkLogin();
+
+if (!empty($_GET['id'])) {
+    $db->destroy($_GET['id']);
+}
+
+if (!empty($_POST)) {
+    $dados = $db->search($_POST);
+} else {
+    $dados = $db->all();
+}
+?>
+
+<style>
+    .hero-trilhas-list {
+        background: linear-gradient(135deg, #145a32, #27ae60);
+        color: #fff;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    .hero-trilhas-list h2 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .hero-trilhas-list p {
+        margin: 0.4rem 0 0;
+        opacity: 0.9;
+    }
+
+    .badge-trilha {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.55rem;
+        border-radius: 999px;
+    }
+
+    .badge-vale {
+        background-color: #d4efdf;
+        color: #145a32;
+    }
+
+    .badge-pedra {
+        background-color: #fcf3cf;
+        color: #7d6608;
+    }
+
+    .badge-pico {
+        background-color: #f5b7b1;
+        color: #922b21;
+    }
+
+    .table-inscricoes thead {
+        background-color: #f8faf9;
+    }
+
+    .table-inscricoes tbody tr:hover {
+        background-color: #f4fbf7;
+    }
+</style>
+
+<div class="container my-4">
+
+    <div class="hero-trilhas-list">
+        <h2>Inscrições em Trilhas</h2>
+        <p>Visualize, filtre e gerencie as inscrições realizadas nas trilhas do WorldCamp.</p>
+    </div>
+
+    <form action="./TrilhasList.php" method="post" class="mb-4">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label">Campo</label>
+                <select name="tipo" class="form-select">
+                    <option value="nome">Nome</option>
+                    <option value="email">Email</option>
+                    <option value="trilha">Trilha</option>
+                    <option value="data_trilha">Data da Trilha</option>
+                </select>
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label">Valor para pesquisa</label>
+                <input type="text" name="valor" placeholder="Digite o termo para buscar"
+                       class="form-control">
+            </div>
+
+            <div class="col-md-4 d-flex gap-2">
+                <div class="me-2">
+                    <button type="submit" class="btn btn-primary w-100 mt-4">Buscar</button>
+                </div>
+                <div>
+                    <a href="./TrilhasForm.php" class="btn btn-success w-100 mt-4">Nova Inscrição</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-inscricoes align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data da Trilha</th>
+                    <th scope="col">Trilha</th>
+                    <th scope="col" class="text-center">Editar</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($dados)) : ?>
+                    <?php foreach ($dados as $item) : ?>
+                        <?php
+                            $nomeTrilha = '';
+                            $badgeClass = '';
+
+                            switch ($item->trilha) {
+                                case 'vale_verde':
+                                    $nomeTrilha = 'Trilha do Vale Verde';
+                                    $badgeClass = 'badge-vale';
+                                    break;
+                                case 'pedra_clara':
+                                    $nomeTrilha = 'Trilha da Pedra Clara';
+                                    $badgeClass = 'badge-pedra';
+                                    break;
+                                case 'pico_nebuloso':
+                                    $nomeTrilha = 'Trilha do Pico Nebuloso';
+                                    $badgeClass = 'badge-pico';
+                                    break;
+                                default:
+                                    $nomeTrilha = $item->trilha;
+                                    $badgeClass = 'badge-secondary';
+                                    break;
+                            }
+                        ?>
+                        <tr>
+                            <th scope="row"><?= $item->id ?></th>
+                            <td><?= $item->nome ?></td>
+                            <td><?= $item->email ?></td>
+                            <td><?= $item->data_trilha ?></td>
+                            <td>
+                                <span class="badge badge-trilha <?= $badgeClass ?>">
+                                    <?= $nomeTrilha ?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a href="./TrilhasForm.php?id=<?= $item->id ?>">Editar</a>
+                            </td>
+                            <td class="text-center">
+                                <a href="./TrilhasList.php?id=<?= $item->id ?>"
+                                   onclick="return confirm('Deseja Excluir esta inscrição?')">
+                                    Excluir
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            Nenhuma inscrição encontrada.
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<?php
+include '../footer.php';
+?>
 
