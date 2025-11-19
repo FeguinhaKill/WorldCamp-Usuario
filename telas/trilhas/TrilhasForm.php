@@ -1,11 +1,55 @@
 <?php
-session_start();
-include '../../header.php';
-include '../../database/db.class.php';
-$db = new db();
+include '../header.php';
+include '../database/db.class.php';
 
-$db->checkLogin();
+$db = new db('agendartrilhas');
+$data = null;
+
+if (!empty($_POST)) {
+    try {
+        $errors = [];
+
+        if (empty($_POST['nome'])) {
+            $errors[] = 'O nome é obrigatório';
+        }
+
+        if (empty($_POST['email'])) {
+            $errors[] = 'O email é obrigatório';
+        }
+
+        if (empty($_POST['data_trilha'])) {
+            $errors[] = 'A data da trilha é obrigatória';
+        }
+
+        if (empty($_POST['trilha'])) {
+            $errors[] = 'A trilha é obrigatória';
+        }
+
+        if (empty($_POST['id'])) {
+            unset($_POST['id']);
+            $db->store($_POST);
+            echo 'Registro Salvo com sucesso!';
+        } else {
+            $db->update($_POST);
+            echo 'Registro Atualizado com sucesso!';
+        }
+
+        echo "<script>
+            setTimeout(
+                ()=> window.location.href = 'TrilhasList.php', 2000
+            );
+        </script>";
+    } catch (Exception $e) {
+        var_dump($errors, $e->getMessage());
+        exit();
+    }
+}
+
+if (!empty($_GET['id'])) {
+    $data = $db->find($_GET['id']);
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -362,5 +406,6 @@ $db->checkLogin();
 include '../../footer.php';
 
 ?>
+
 
 
