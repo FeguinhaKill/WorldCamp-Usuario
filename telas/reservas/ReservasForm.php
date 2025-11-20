@@ -102,6 +102,36 @@ if (!empty($_GET['Id'])) {
             font-size: 0.9rem;
             color: #6c757d;
         }
+
+        .card-resumo {
+            background: linear-gradient(135deg, #ffffff, #e9f7ef);
+            border-radius: 14px;
+            border: 1px solid #d1e7dd;
+        }
+
+        .card-resumo h4 {
+            font-weight: 600;
+            color: var(--verde-escuro);
+        }
+
+        .card-resumo ul {
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 0.75rem;
+            font-size: 0.93rem;
+        }
+
+        .card-resumo ul li + li {
+            margin-top: 0.35rem;
+        }
+
+        .card-resumo i {
+            margin-right: 0.4rem;
+        }
+
+        .card-resumo .nota {
+            font-size: 0.8rem;
+        }
     </style>
 
     <title>Reservas - WorldCamp</title>
@@ -212,25 +242,42 @@ if (!empty($_GET['Id'])) {
                 </div>
             </div>
 
+            <!-- CARD LATERAL AJUSTADO -->
             <div class="col-lg-5">
-                <div class="card shadow-sm h-100 border-0">
+                <div class="card shadow-sm h-100 border-0 card-resumo">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                            <h4 class="mb-2">
+                            <h4 class="mb-3">
                                 <i class="fa-solid fa-list-check"></i> Minhas reservas
                             </h4>
-                            <p class="text-muted mb-3">
-                                Confira suas experiências no WorldCamp: 
-                                <strong>cabanas na floresta</strong> a partir de aproximadamente 
-                                <strong>R$ 600,00</strong> a diária, 
-                                <strong>dormitórios compartilhados</strong> em torno de 
-                                <strong>R$ 300,00</strong> a diária, e 
-                                <strong>programa de voluntariado</strong> sem custo de hospedagem.
-                                Acompanhe datas, tipos de acomodação e valores estimados das suas reservas em um só lugar.
+
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-tree text-success"></i>
+                                    Cabanas na floresta ~ <strong>R$ 600,00</strong> por diária.
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-bed text-success"></i>
+                                    Dormitórios compartilhados ~ <strong>R$ 300,00</strong> por diária.
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-hand-holding-heart text-success"></i>
+                                    Programa de voluntariado: <strong>sem custo de hospedagem</strong>.
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-calendar-days text-success"></i>
+                                    Acompanhe datas, tipo de acomodação e quantidade de dormitórios.
+                                </li>
+                            </ul>
+
+                            <p class="text-muted nota mt-2">
+                                <i class="fa-solid fa-circle-info me-1"></i>
+                                Os valores são estimativas por diária e podem variar conforme promoções
+                                ou períodos de alta temporada.
                             </p>
                         </div>
 
-                        <a href="ReservasList.php" class="btn btn-outline-success w-100 mt-2">
+                        <a href="ReservasList.php" class="btn btn-outline-success w-100 mt-3">
                             <i class="fa-solid fa-table-list"></i> Ver listagem de reservas
                         </a>
                     </div>
