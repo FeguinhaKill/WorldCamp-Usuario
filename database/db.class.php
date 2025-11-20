@@ -16,7 +16,7 @@ class db
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function conn()
+    public function conn()
     {
         try {
             $conn = new PDO(
@@ -24,17 +24,19 @@ class db
                 $this->user,
                 $this->password,
                 [
-                    PDO::ATTR_ERRMODE,
-                    PDO::ERRMODE_EXCEPTION,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => " SET NAMES utf8"
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
                 ]
             );
 
             return $conn;
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
+            exit;
         }
     }
+
+ 
 
     public function store($dados)
     {
@@ -114,22 +116,6 @@ class db
             $dados['dormitorio'],
         ]);
     }
-    public function storeTrilha($dados)
-{
-    $conn = $this->conn();
-
-    $sql = "INSERT INTO `agendartrilhas` 
-            (`nome_usuario`, `trilha`, `data_realizacao`, `numero_acompanhantes`) 
-            VALUES (?, ?, ?, ?)";
-
-    $st = $conn->prepare($sql);
-    $st->execute([
-        $dados['nome_usuario'],
-        $dados['trilha'],
-        $dados['data_realizacao'],
-        $dados['numero_acompanhantes'],
-    ]);
-}
 
     public function updateReserva($dados)
     {
@@ -151,37 +137,15 @@ class db
             $dados['Id']
         ]);
     }
-    public function updateTrilha($dados)
-{
-    $conn = $this->conn();
-
-    $sql = "UPDATE `agendartrilhas`
-               SET `nome_usuario` = ?, 
-                   `trilha` = ?, 
-                   `data_realizacao` = ?, 
-                   `numero_acompanhantes` = ?
-             WHERE Id = ?";
-
-    $st = $conn->prepare($sql);
-    $st->execute([
-        $dados['nome_usuario'],
-        $dados['trilha'],
-        $dados['data_realizacao'],
-        $dados['numero_acompanhantes'],
-        $dados['Id']
-    ]);
-}
-
 
     public function allReserva()
     {
         $conn = $this->conn();
-        $sql = "SELECT * FROM agendardormitorio";
+        $sql = "SELECT * FROM agendardormitorio ORDER BY Id DESC";
         $st = $conn->prepare($sql);
         $st->execute();
         return $st->fetchAll(PDO::FETCH_CLASS);
     }
-
 
     public function destroyReserva($id)
     {
@@ -202,13 +166,142 @@ class db
         return $st->fetchObject();
     }
 
-    function checkLogin()
+
+
+    public function searchReserva($dados)
     {
-        if (empty($_SESSION['nome'])) {
-            session_destroy();
-            header('Location: ../localhost/WorldCamp-Usuario/usuario/login.php');
+        $tipo  = $dados["tipo"];  
+        $valor = $dados["valor"];
+
+        
+        $colunasValidas = ["nome-usuario", "check-in", "check-out", "dormitorio"];
+
+        if (!in_array($tipo, $colunasValidas)) {
+            return [];
         }
+
+      
+        $sql = "SELECT * FROM agendardormitorio 
+                WHERE `$tipo` LIKE :valor
+                ORDER BY Id DESC";
+
+        $stmt = $this->conn()->prepare($sql);
+        $stmt->bindValue(':valor', '%' . $valor . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function allReservas()
+    {
+       
+        return $this->allReserva();
+    }
+
+    public function deleteReserva($id)
+    {
+        return $this->destroyReserva($id);
+    }
+
+
+
+    public function storeTrilha($dados)
+    {
+        $conn = $this->conn();
+
+        $sql = "INSERT INTO `agendartrilhas` 
+                (`nome_usuario`, `trilha`, `data_realizacao`, `numero_acompanhantes`) 
+                VALUES (?, ?, ?, ?)";
+
+        $st = $conn->prepare($sql);
+        $st->execute([
+            $dados['nome_usuario'],
+            $dados['trilha'],
+            $dados['data_realizacao'],
+            $dados['numero_acompanhantes'],
+        ]);
+    }
+
+    public function updateTrilha($dados)
+    {
+        $conn = $this->conn();
+
+        $sql = "UPDATE `agendartrilhas`
+                   SET `nome_usuario` = ?, 
+                       `trilha` = ?, 
+                       `data_realizacao` = ?, 
+                       `numero_acompanhantes` = ?
+                 WHERE Id = ?";
+
+        $st = $conn->prepare($sql);
+        $st->execute([
+            $dados['nome_usuario'],
+            $dados['trilha'],
+            $dados['data_realizacao'],
+            $dados['numero_acompanhantes'],
+            $dados['Id']
+        ]);
+    }
+
+    public function searchTrilha($dados)
+    {
+        $tipo  = $dados["tipo"];   
+        $valor = $dados["valor"];
+
+        $mapaColunas = [
+            "nome"                => "nome_usuario",
+            "data_realizacao"     => "data_realizacao",
+            "trilha"              => "trilha",
+            "numero_acompanhantes"=> "numero_acompanhantes"
+        ];
+
+        if (!isset($mapaColunas[$tipo])) {
+            return [];
+        }
+
+        $coluna = $mapaColunas[$tipo];
+
+        $sql = "SELECT * FROM agendartrilhas 
+                WHERE $coluna LIKE :valor
+                ORDER BY Id DESC";
+
+        $stmt = $this->conn()->prepare($sql);
+        $stmt->bindValue(':valor', '%' . $valor . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+   
+    public function allTrilhas()
+    {
+        $conn = $this->conn();
+        $sql = "SELECT * FROM agendartrilhas ORDER BY Id DESC";
+        $st = $conn->prepare($sql);
+        $st->execute();
+        return $st->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function findTrilha($Id)
+    {
+        $conn = $this->conn();
+        $sql = "SELECT * FROM agendartrilhas WHERE Id = :Id";
+        $st = $conn->prepare($sql);
+        $st->bindValue(':Id', $Id, PDO::PARAM_INT);
+        $st->execute();
+        return $st->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function deleteTrilha($Id)
+    {
+        $conn = $this->conn();
+        $sql = "DELETE FROM agendartrilhas WHERE Id = :Id";
+        $st = $conn->prepare($sql);
+        $st->bindValue(':Id', $Id, PDO::PARAM_INT);
+        return $st->execute();
+    }
+
+  
 
     public function getCompras()
     {
@@ -255,6 +348,7 @@ class db
             foreach ($descricaosBD as $f) {
                 $listaDescricoes[] = $f['descricao'];
             }
+
             $produtos[$p['id']] = [
                 'id'         => $p['id'],
                 'nome'       => $p['nome'],
@@ -267,57 +361,24 @@ class db
 
         return $produtos;
     }
-    public function searchTrilha($dados)
-{
-    $tipo  = $dados["tipo"];  
-    $valor = $dados["valor"]; 
-    $colunasValidas = ["nome", "datarealizacao", "trilha", "numeroacompanhantes"];
-    if (!in_array($tipo, $colunasValidas)) {
-        return [];
+
+    public function deleteCompra($id)
+    {
+        $sql = "DELETE FROM compras_realizadas WHERE id = ?";
+        $stmt = $this->conn()->prepare($sql);
+        return $stmt->execute([$id]);
     }
 
-    $sql = "SELECT * FROM agendartrilhas WHERE $tipo LIKE :valor ORDER BY Id DESC";
 
-    $stmt = $this->conn()->prepare($sql); 
-    $stmt->execute();
-
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-// listar todas as trilhas
-public function allTrilhas()
-{
-    $conn = $this->conn();
-    $sql = "SELECT * FROM agendartrilhas ORDER BY Id DESC";
-    $st = $conn->prepare($sql);
-    $st->execute();
-    return $st->fetchAll(PDO::FETCH_OBJ);
+    public function checkLogin()
+    {
+        if (empty($_SESSION['nome'])) {
+            session_destroy();
+         
+            header('Location: ../localhost/WorldCamp-Usuario/usuario/login.php');
+            exit;
+        }
+    }
 }
 
-public function findTrilha($Id)
-{
-    $conn = $this->conn();
-    $sql = "SELECT * FROM agendartrilhas WHERE Id = :Id";
-    $st = $conn->prepare($sql);
-    $st->bindValue(':Id', $Id, PDO::PARAM_INT);
-    $st->execute();
-    return $st->fetch(PDO::FETCH_OBJ);
-}
-
-// excluir por Id
-public function deleteTrilha($Id)
-{
-    $conn = $this->conn();
-    $sql = "DELETE FROM agendartrilhas WHERE Id = :Id";
-    $st = $conn->prepare($sql);
-    $st->bindValue(':Id', $Id, PDO::PARAM_INT);
-    return $st->execute();
-}
-public function deleteCompra($id) {
-    $sql = "DELETE FROM compras_realizadas WHERE id = ?";
-    $stmt = $this->conn()->prepare($sql);
-    return $stmt->execute([$id]);
-}
-
-
-}
 ?>
