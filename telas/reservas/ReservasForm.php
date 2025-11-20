@@ -3,7 +3,7 @@ session_start();
 include '../../header.php';
 include '../../database/db.class.php';
 
-$db = new db();
+$db = new db(); 
 $db->checkLogin();
 $data = null;
 
@@ -50,26 +50,58 @@ if (!empty($_GET['Id'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
 
     <style>
-        :root { --verde:#198754; --verde-escuro:#146c43; --texto:#212529; }
-        body { margin:0; background:#f5f8f6; color:var(--texto); }
-        .btn-success { background:var(--verde); border-color:var(--verde-escuro); }
-        .btn-success:hover { background:var(--verde-escuro); }
+        :root {
+            --verde: #198754;
+            --verde-escuro: #146c43;
+            --texto: #212529;
+        }
+
+        body {
+            margin: 0;
+            color: var(--texto);
+            min-height: 100vh;
+            background-color: #f5f8f6;
+        }
+
+        .btn-success {
+            background: var(--verde);
+            border-color: var(--verde-escuro);
+        }
+
+        .btn-success:hover {
+            background: var(--verde-escuro);
+        }
+
         .hero-reservas {
-            background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
+            background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)),
             url("https://images.unsplash.com/photo-1523419409543-3e4f83b9b4c9?auto=format&fit=crop&w=1600&q=80")
             center/cover no-repeat;
-            color:white;
-            text-align:center;
-            padding:5rem 2rem;
-            border-radius:10px;
-            margin-top:2rem;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
         }
-        .hero-reservas h1 { font-size:2.8rem; font-weight:700; }
-        .resumo-total { font-size:0.9rem; color:#6c757d; }
+
+        .hero-reservas h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        .resumo-total {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
     </style>
 
     <title>Reservas - WorldCamp</title>
@@ -88,11 +120,14 @@ if (!empty($_GET['Id'])) {
 
     <section id="form-reserva" class="mb-5">
         <div class="row g-4">
+            
             <div class="col-lg-7">
                 <div class="card shadow-sm">
                     <div class="card-body">
 
-                        <h3 class="mb-3"><i class="fa-solid fa-pen-to-square"></i> Solicitar reserva</h3>
+                        <h3 class="mb-3">
+                            <i class="fa-solid fa-pen-to-square"></i> Solicitar reserva
+                        </h3>
 
                         <form action="" method="post" id="formReserva">
                             <input type="hidden" name="Id" value="<?= $data->Id ?? '' ?>">
@@ -176,6 +211,32 @@ if (!empty($_GET['Id'])) {
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-5">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="mb-2">
+                                <i class="fa-solid fa-list-check"></i> Minhas reservas
+                            </h4>
+                            <p class="text-muted mb-3">
+                                Confira suas experiências no WorldCamp: 
+                                <strong>cabanas na floresta</strong> a partir de aproximadamente 
+                                <strong>R$ 600,00</strong> a diária, 
+                                <strong>dormitórios compartilhados</strong> em torno de 
+                                <strong>R$ 300,00</strong> a diária, e 
+                                <strong>programa de voluntariado</strong> sem custo de hospedagem.
+                                Acompanhe datas, tipos de acomodação e valores estimados das suas reservas em um só lugar.
+                            </p>
+                        </div>
+
+                        <a href="ReservasList.php" class="btn btn-outline-success w-100 mt-2">
+                            <i class="fa-solid fa-table-list"></i> Ver listagem de reservas
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
