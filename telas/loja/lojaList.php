@@ -69,7 +69,7 @@ $compras = $db->getComprasFiltradas($_POST);
 </form>
 
 
-    <!-- TABELA -->
+   
     <div class="table-responsive">
         <table class="table table-striped table-hover table-reservas align-middle">
             <thead>
@@ -133,3 +133,4 @@ $compras = $db->getComprasFiltradas($_POST);
 </div>
 
 <?php include '../../footer.php'; ?>
+
