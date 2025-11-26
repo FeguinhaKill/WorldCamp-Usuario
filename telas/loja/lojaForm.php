@@ -5,11 +5,92 @@ $db = new db();
 
 $db->checkLogin();
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao"] === "finalizar") {
+  $json = file_get_contents("php://input");
+  $carrinho = json_decode($json, true);
+
+  if (!$carrinho) {
+    http_response_code(400);
+    echo "Carrinho inválido";
+    exit;
+  }
+
+  if (!isset($_SESSION["nome"])) {
+    http_response_code(401);
+    echo "Usuário não logado";
+    exit;
+  }
+
+  $nome_usuario = $_SESSION["nome"];
+  $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
+
+  // A data já pode ser salva automaticamente caso sua tabela tenha CURRENT_TIMESTAMP
+  $db->query("
+        INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
+        VALUES (?, ?, NOW())
+    ", [
+    $nome_usuario,
+    $produtos_json
+  ]);
+
+  echo "OK";
+  exit;
+  
+}
+
 include '../../header.php';
-$produtos = $db->getProdutos();
-$compras = $db->getCompras();
+$comprasBD = $db->query("SELECT * FROM compras_realizadas ORDER BY data_compra DESC");
+
+$compras = [];
+
+foreach ($comprasBD as $c) {
+  $compras[] = [
+    'id' => $c['id'],
+    'nome_usuario' => $c['nome_usuario'],
+    'data' => $c['data_compra'],
+    'itens' => json_decode($c['produtos_json'], true)
+  ];
+}
+$editando = false;
+$compra_edicao = null;
+
+if (isset($_GET['id'])) {
+    $editando = true;
+    $id = intval($_GET['id']);
+
+    $compra_edicao = $db->query("SELECT * FROM compras_realizadas WHERE id = ?", [$id]);
+
+    if ($compra_edicao) {
+        $compra_edicao = $compra_edicao[0];
+        $compra_itens = json_decode($compra_edicao['produtos_json'], true);
+    }
+}
 
 
+
+
+
+$produtosBD = $db->query("SELECT * FROM produtos");
+
+$produtos = [];
+
+foreach ($produtosBD as $p) {
+  $descricaosBD = $db->query("SELECT descricao FROM produtos_descricao WHERE product_id = ?", [$p['id']]);
+
+  $listaDescricoes = [];
+  foreach ($descricaosBD as $f) {
+    $listaDescricoes[] = $f['descricao'];
+  }
+
+  $produtos[$p['id']] = [
+    'id' => $p['id'],
+    'nome' => $p['nome'],
+    'categoria' => $p['categoria'],
+    'preco' => $p['preco'],
+    'imagem' => $p['imagem_path'],
+    'descricaos' => $listaDescricoes
+  ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -41,7 +122,6 @@ $compras = $db->getCompras();
       padding-bottom: 72px;
       background-color: #f5f8f6;
     }
-
 
     main {
       flex: 1 0 auto;
@@ -101,7 +181,11 @@ $compras = $db->getCompras();
 <body>
   <script>
     const carrinho = [];
-
+    <?php if ($editando && !empty($compra_itens)): ?>
+     carrinho = <?= json_encode($compra_itens, JSON_UNESCAPED_UNICODE) ?>;
+<?php else: ?>
+     carrinho = [];
+<?php endif; ?>
     function addCarrinho(botao, nome, preco) {
       const noCarrinho = carrinho.find(item => item.nome === nome);
       const quantidade = botao.parentElement.querySelector(".quantidade").value;
@@ -109,17 +193,12 @@ $compras = $db->getCompras();
       if (noCarrinho) {
         noCarrinho.quantidade += parseInt(quantidade);
       } else {
-        carrinho.push({
-          nome,
-          preco,
-          quantidade: parseInt(quantidade)
-        });
+        carrinho.push({ nome, preco, quantidade: parseInt(quantidade) });
       }
 
       alert(`Adicionado ao carrinho: ${nome} (Quantidade: ${quantidade}) - Preço unitário: R$ ${preco}`);
 
     }
-
     function mostrarCarrinho() {
       const container = document.getElementById("carrinhoConteudo");
 
@@ -169,17 +248,13 @@ $compras = $db->getCompras();
       modal.show();
 
     }
-
     function removerDoCarrinho(nome) {
-      confirmation = confirm(`Tem certeza que deseja remover ${nome} do carrinho?`);
-      if (!confirmation) return;
       const index = carrinho.findIndex(item => item.nome === nome);
       if (index !== -1) {
         carrinho.splice(index, 1);
         mostrarCarrinho();
       }
     }
-
     function finalizarCompra() {
       if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -187,19 +262,17 @@ $compras = $db->getCompras();
       }
 
       fetch("lojaProdutos.php?acao=finalizar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(carrinho)
-        })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(carrinho)
+      })
         .then(res => res.text())
         .then(res => {
           if (res === "OK") {
             alert("Compra finalizada e registrada no banco!");
 
             carrinho.length = 0;
-            mostrarCarrinho();
+            mostrarCarrinho(); // atualizar modal
 
             const modalEl = document.getElementById("carrinhoModal");
             const modal = bootstrap.Modal.getInstance(modalEl);
@@ -212,22 +285,23 @@ $compras = $db->getCompras();
           alert("Erro no envio: " + err);
         });
     }
+function atualizarQuantidade(nome, novaQtd) {
+        novaQtd = parseInt(novaQtd);
 
-    function atualizarQuantidade(nome, novaQtd) {
-      novaQtd = parseInt(novaQtd);
+        if (novaQtd <= 0 || isNaN(novaQtd)) {
+            alert("Quantidade inválida");
+            return;
+        }
 
-      if (novaQtd <= 0 || isNaN(novaQtd)) {
-        alert("Quantidade inválida");
-        return;
-      }
+        const item = carrinho.find(p => p.nome === nome);
+        if (item) {
+            item.quantidade = novaQtd;
+        }
 
-      const item = carrinho.find(p => p.nome === nome);
-      if (item) {
-        item.quantidade = novaQtd;
-      }
-
-      mostrarCarrinho();
+        mostrarCarrinho();
     }
+
+
   </script>
   <main class="container my-5">
 
@@ -295,11 +369,12 @@ $compras = $db->getCompras();
 
       <?php endforeach; ?>
     </div>
-    <div class="mt-5">
-  <a href="lojaList.php" class="btn btn-outline-success">
-    Ver Compras Recentes
-  </a>
+    <div class="text-center mt-5 mb-5">
+    <a href="lojaList.php" class="btn btn-success btn-lg">
+        <i class="fa-solid fa-list"></i> Ver Histórico de Compras
+    </a>
 </div>
+
 
 
   </main>

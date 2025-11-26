@@ -42,7 +42,7 @@ class db
     {
         $conn = $this->conn();
 
-        $sql = "INSERT INTO `listausuarios` (`Nome`, `Email`, `cpf`, `telefone`, `senha`) 
+        $sql = "INSERT INTO `usuarios` (`Nome`, `Email`, `cpf`, `telefone`, `senha`) 
                 VALUES (?, ?, ?, ?, ?);";
         $st = $conn->prepare($sql);
         $st->execute([
@@ -57,26 +57,16 @@ class db
     public function all()
     {
         $conn = $this->conn();
-        $sql = "SELECT * FROM listausuarios";
+        $sql = "SELECT * FROM usuarios";
         $st = $conn->prepare($sql);
         $st->execute();
         return $st->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function destroy($id)
-    {
-        $conn = $this->conn();
-
-        $sql = "DELETE FROM listausuarios WHERE id = ?";
-
-        $st = $conn->prepare($sql);
-        $st->execute([$id]);
-    }
-
     public function find($id)
     {
         $conn = $this->conn();
-        $sql = "SELECT * FROM listausuarios WHERE id = ?";
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
         $st = $conn->prepare($sql);
         $st->execute([$id]);
         return $st->fetchObject();
@@ -165,6 +155,90 @@ class db
         $st->execute([$id]);
         return $st->fetchObject();
     }
+public function getComprasFiltradas($post)
+{
+    if (!empty($post["valor"])) {
+        return $this->searchCompras($post);
+    }
+    return $this->getCompras();
+}
+public function processarUpdateCompra()
+{
+    if (!isset($_POST['salvar'])) {
+        return;
+    }
+
+    $id = intval($_POST['id']);
+    $qtd = intval($_POST['quantidade']);
+    $itemIndex = intval($_POST['itemIndex']);
+
+    if ($qtd > 0 && $this->updateCompra($id, $itemIndex, $qtd)) {
+        echo "<script>alert('Quantidade alterada!');window.location='lojaList.php';</script>";
+        exit;
+    }
+
+    header('Location: lojaList.php');
+    exit;
+}
+public function processarExclusaoCompra()
+{
+    if (!isset($_GET['excluir'])) {
+        return;
+    }
+
+    $id = intval($_GET['excluir']);
+
+    if ($this->deleteCompra($id)) {
+        echo "<script>alert('Compra excluída com sucesso!');window.location='lojaList.php';</script>";
+        exit;
+    }
+
+    echo "<script>alert('Erro ao excluir');</script>";
+}
+public function getReservasFiltradas($post)
+{
+    if (!empty($post)) {
+        return $this->searchReserva($post);
+    }
+    return $this->allReservas();
+}
+public function processarExclusaoReserva()
+{
+    if (!isset($_GET['Id'])) {
+        return;
+    }
+
+    $id = intval($_GET['Id']);
+
+    if ($this->deleteReserva($id)) {
+        echo "<script>alert('Reserva excluída!');window.location='ReservasList.php';</script>";
+        exit;
+    }
+
+    echo "<script>alert('Erro ao excluir reserva');</script>";
+}
+public function processarExclusaoTrilha()
+{
+    if (!isset($_GET['Id'])) {
+        return;
+    }
+
+    $id = intval($_GET['Id']);
+
+    if ($this->deleteTrilha($id)) {
+        echo "<script>alert('Agendamento excluído!');window.location='trilhasList.php';</script>";
+        exit;
+    }
+
+    echo "<script>alert('Erro ao excluir agendamento');</script>";
+}
+public function getTrilhasFiltradas($post)
+{
+    if (!empty($post)) {
+        return $this->searchTrilha($post);
+    }
+    return $this->allTrilhas();
+}
 
 
 
@@ -191,6 +265,48 @@ class db
 
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+public function searchCompras($dados)
+{
+    $tipo  = $dados["tipo"];
+    $valor = strtolower($dados["valor"]);
+
+    $todas = $this->getCompras();
+    $resultado = [];
+
+    foreach ($todas as $compra) {
+
+        $match = false;
+        $itensFiltrados = [];
+
+        foreach ($compra['itens'] as $item) {
+
+            if ($tipo == "produto" && str_contains(strtolower($item['nome']), $valor)) {
+                $match = true;
+                $itensFiltrados[] = $item;
+            }
+        }
+
+        if ($tipo == "usuario" && str_contains(strtolower($compra['nome_usuario']), $valor)) {
+            $match = true;
+            $itensFiltrados = $compra['itens']; // mantém todos
+        }
+
+        if ($tipo == "data" && str_contains(strtolower($compra['data']), $valor)) {
+            $match = true;
+            $itensFiltrados = $compra['itens'];
+        }
+
+        if ($match)
+            $resultado[] = [
+                "id"           => $compra['id'],
+                "nome_usuario" => $compra['nome_usuario'],
+                "data"         => $compra['data'],
+                "itens"        => $itensFiltrados
+            ];
+    }
+    return $resultado;
+}
+
 
     public function allReservas()
     {
@@ -301,7 +417,25 @@ class db
         return $st->execute();
     }
 
-  
+public function updateCompra($id, $itemIndex, $qtd)
+{
+    $compra = $this->query("SELECT produtos_json FROM compras_realizadas WHERE id=?", [$id]);
+    if (!$compra) return false;
+
+    $lista = json_decode($compra[0]['produtos_json'], true);
+
+    if (isset($lista[$itemIndex])) {
+        $lista[$itemIndex]['quantidade'] = $qtd;
+    }
+
+    $json = json_encode($lista, JSON_UNESCAPED_UNICODE);
+
+    return $this->query("UPDATE compras_realizadas SET produtos_json=? WHERE id=?", [$json, $id]);
+}
+
+
+
+
 
     public function getCompras()
     {
@@ -327,41 +461,6 @@ class db
         return $compras;
     }
 
-    public function getProdutos()
-    {
-        $conn = $this->conn();
-
-        $sql = "SELECT * FROM produtos";
-        $st = $conn->prepare($sql);
-        $st->execute();
-        $produtosBD = $st->fetchAll(PDO::FETCH_ASSOC);
-
-        $produtos = [];
-
-        foreach ($produtosBD as $p) {
-            $sqlDescricao = "SELECT descricao FROM produtos_descricao WHERE product_id = ?";
-            $stDesc = $conn->prepare($sqlDescricao);
-            $stDesc->execute([$p['id']]);
-            $descricaosBD = $stDesc->fetchAll(PDO::FETCH_ASSOC);
-
-            $listaDescricoes = [];
-            foreach ($descricaosBD as $f) {
-                $listaDescricoes[] = $f['descricao'];
-            }
-
-            $produtos[$p['id']] = [
-                'id'         => $p['id'],
-                'nome'       => $p['nome'],
-                'categoria'  => $p['categoria'],
-                'preco'      => $p['preco'],
-                'imagem'     => $p['imagem_path'],
-                'descricaos' => $listaDescricoes
-            ];
-        }
-
-        return $produtos;
-    }
-
     public function deleteCompra($id)
     {
         $sql = "DELETE FROM compras_realizadas WHERE id = ?";
@@ -370,15 +469,18 @@ class db
     }
 
 
-    public function checkLogin()
-    {
-        if (empty($_SESSION['nome'])) {
-            session_destroy();
-         
-            header('Location: ../localhost/WorldCamp-Usuario/usuario/login.php');
-            exit;
-        }
+public function checkLogin()
+{
+    if (empty($_SESSION['nome'])) {
+        session_destroy();
+     
+        header('Location: ../localhost/WorldCamp-Usuario/usuario/login.php');
+        exit;
     }
+}
+
+
+    
 }
 
 ?>

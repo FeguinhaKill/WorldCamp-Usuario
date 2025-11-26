@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                 FAZER SE SOBRAR TEMPO
                 -->
                 <div class="d-grid mb-2">
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn btn-success">Entrar</button>
                 </div>
 
                 <div class="text-center small">

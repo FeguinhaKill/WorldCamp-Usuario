@@ -97,7 +97,7 @@ if (!empty($_POST)) {
         <div class="card shadow-sm card-trilha h-100">
           <img src="../../imagens/trilha_vale_verde.png" loading="lazy" style="height:225px; object-fit:cover;"
             class="card-img-top" alt="Trilha do Vale Verde" />
-          <div class="card-body">
+          <div class="card-body"> 
             <span class="badge bg-success badge-nivel mb-2">Nível: Fácil</span>
             <h4 class="card-title">Trilha do Vale Verde</h4>
             <p class="card-text">
@@ -216,6 +216,12 @@ if (!empty($_POST)) {
         </button>
       </div>
     </form>
+    <div class="text-center mt-4 mb-5">
+  <a href="TrilhasList.php" class="btn btn-outline-success btn-lg">
+    <i class="fa-solid fa-list"></i> Ver Inscrições Realizadas
+  </a>
+</div>
+
 
   </main>
 

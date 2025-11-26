@@ -6,16 +6,10 @@ include '../../database/db.class.php';
 $db = new db();
 $db->checkLogin();
 
-if (!empty($_GET['Id'])) {
-    $db->deleteTrilha($_GET['Id']);
-}
-
-if (!empty($_POST)) {
-    $agendamento = $db->searchTrilha($_POST);
-} else {
-    $agendamento = $db->allTrilhas();
-}
+$db->processarExclusaoTrilha();
+$agendamento = $db->getTrilhasFiltradas($_POST);
 ?>
+
 
 <style>
     .hero-trilhas-list {
@@ -127,11 +121,12 @@ if (!empty($_POST)) {
                             <td>
                             </td>
                             <td class="text-center">
-                                <a href="./TrilhasForm.php?Id=<?= $item->Id ?>">Editar</a>
+                                <a href="./TrilhasForm.php?Id=<?= $item->Id ?>" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td class="text-center">
                                 <a href="./TrilhasList.php?Id=<?= $item->Id ?>"
-                                    onclick="return confirm('Deseja Excluir esta inscrição?')">Excluir</a>
+                                    onclick="return confirm('Deseja Excluir esta inscrição?')"
+                                    class="btn btn-danger btn-sm">Excluir</a>
 
                             </td>
                         </tr>

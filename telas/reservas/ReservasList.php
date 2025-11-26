@@ -3,20 +3,13 @@ session_start();
 include '../../header.php';
 include '../../database/db.class.php';
 
-$db = new db(); 
+$db = new db();
 $db->checkLogin();
 
-if (!empty($_GET['Id'])) {
-    $db->deleteReserva($_GET['Id']);
-}
-
-
-if (!empty($_POST)) {
-    $reservas = $db->searchReserva($_POST);
-} else {
-    $reservas = $db->allReservas();
-}
+$db->processarExclusaoReserva();
+$reservas = $db->getReservasFiltradas($_POST);
 ?>
+
 
 <style>
     .hero-reservas-list {
@@ -109,14 +102,19 @@ if (!empty($_POST)) {
                             <td><?= $item->{'check-out'} ?></td>
                             <td><?= $item->dormitorio ?></td>
                             <td class="text-center">
-                                <a href="./ReservasForm.php?Id=<?= $item->Id ?>">Editar</a>
+                                <a href="./ReservasForm.php?Id=<?= $item->Id ?>" class="btn btn-primary btn-sm">
+                                    Editar
+                                </a>
                             </td>
+
                             <td class="text-center">
                                 <a href="./ReservasList.php?Id=<?= $item->Id ?>"
-                                   onclick="return confirm('Deseja excluir esta reserva?')">
+                                    onclick="return confirm('Deseja excluir esta reserva?')"
+                                    class="btn btn-danger btn-sm">
                                     Excluir
                                 </a>
                             </td>
+
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
