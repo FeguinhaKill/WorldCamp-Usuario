@@ -1,6 +1,6 @@
 <?php
 include '../header.php';
-include '../database/db.class.php';
+include '../db.class.php';
 $db = new db();
 if (!empty($_POST)) {
 
@@ -73,7 +73,7 @@ if (!empty($_GET['id'])) {
         </div>
     </div>
     <div class="row">
-        <button type="submit" class="btn btn-success mt-3">Salvar</button>
+        <button type="submit" class="btn btn-primary mt-3">Salvar</button>
         <a href="./login.php" class="btn btn-secondary mt-3">Ja possuo uma conta</a>
     </div>
 </form>

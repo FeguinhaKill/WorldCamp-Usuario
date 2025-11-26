@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
 
       <?php  $page = basename($_SERVER['PHP_SELF']); if ($page === 'dashboard.php') { ?>
 
-        <div class="text-center">
-          <div class="logo h1"><img src="../imagens/logoWorldCamp.png" width="75" height="75" alt="Logo">World Camp</div>
+        <div class="text-center mb-4">
+          <div class="logo h1"><img src="../imagens/logoWorldCamp.png" width="100" height="100" alt="Logo">World Camp</div>
         </div>
 
       <?php } else  { ?>

@@ -10,14 +10,14 @@ $db->checkLogin();
 <div class="container">
     <Title>Dashboard do Usuário</Title>
     <h1>Dashboard</h1>
+    <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
 </div>
 <div>
-    <?php echo("Bem-vindo! " . $_SESSION["nome"]); ?>
     <div class="row g-3">
         <div class="col-md-4">
             <div class="background-img-loja">
                 <div class="card-body">
-                    <a href="./loja/lojaForm.php" class="btn btn-primary mt-2">Ir para Loja</a>
+                    <a href="./loja/lojaProdutos.php" class="btn btn-primary mt-2">Ir para Loja</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@ $db->checkLogin();
         <div class="col-md-4">
             <div class="background-img-reservas">
                 <div class="card-body">
-                        <a href="./reservas/ReservasForm.php" class="btn btn-success mt-2">Fazer Reservas</a>
+                        <a href="./reservas/Reservas.php" class="btn btn-success mt-2">Fazer Reservas</a>
                     </div>
             </div>
         </div>
@@ -34,7 +34,7 @@ $db->checkLogin();
         <div class="col-md-4">
             <div class="background-img-trilhas">
                 <div class="card-body">
-                    <a href="./trilhas/TrilhasForm.php" class="btn btn-info mt-2">Agendar Trilhas</a>
+                    <a href="./trilhas/agendarTrilhas.php" class="btn btn-info mt-2">Agendar Trilhas</a>
                 </div>
             </div>
         </div>
@@ -44,8 +44,3 @@ $db->checkLogin();
 <?php
 include '../footer.php';
 ?>
-
-
-
-
-
