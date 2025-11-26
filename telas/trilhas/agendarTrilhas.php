@@ -119,7 +119,6 @@ $db->checkLogin();
   </head>
   <body>
     <main class="container my-4">
-      <!-- HERO -->
       <section class="hero-trilhas mb-5">
         <h1>Inscreva-se nas Trilhas WorldCamp</h1>
         <p class="lead">

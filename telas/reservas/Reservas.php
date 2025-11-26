@@ -226,7 +226,6 @@ $db->checkLogin();
                 </p>
 
                 <form action="processa_reserva.php" method="post">
-                  <!-- Tipo de acomodação -->
                   <div class="mb-3">
                     <label for="tipo_acomodacao" class="form-label">
                       Tipo de acomodação
@@ -244,7 +243,6 @@ $db->checkLogin();
                     </select>
                   </div>
 
-                  <!-- Dados pessoais -->
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="nome_completo" class="form-label">Nome completo</label>
@@ -292,8 +290,6 @@ $db->checkLogin();
                       />
                     </div>
                   </div>
-
-                  <!-- Datas -->
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="data_checkin" class="form-label">Data de check-in</label>
@@ -317,7 +313,6 @@ $db->checkLogin();
                     </div>
                   </div>
 
-                  <!-- Forma de pagamento + total -->
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="forma_pagamento" class="form-label">Forma de pagamento</label>
@@ -344,12 +339,10 @@ $db->checkLogin();
                         placeholder="R$ 0,00"
                       />
                       <div class="resumo-total mt-1" id="resumo_diarias">
-                        <!-- resumo de diárias aparece aqui via JS -->
                       </div>
                     </div>
                   </div>
 
-                  <!-- Observações -->
                   <div class="mb-3">
                     <label for="observacoes" class="form-label">
                       Observações (pets, restrições, voluntariado etc.)

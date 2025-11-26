@@ -76,7 +76,7 @@ if (!empty($_POST)) {
       const acompanhantes = document.querySelector('input[name="numero_acompanhantes"]').value;
       if (!data) {
         alert("Por favor, selecione uma data para realizar a trilha.");
-        return; // impede o envio
+        return; 
       }
       document.getElementById('formTrilha').submit();
     }

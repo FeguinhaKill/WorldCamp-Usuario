@@ -241,8 +241,6 @@ if (!empty($_GET['Id'])) {
                     </div>
                 </div>
             </div>
-
-            <!-- CARD LATERAL AJUSTADO -->
             <div class="col-lg-5">
                 <div class="card shadow-sm h-100 border-0 card-resumo">
                     <div class="card-body d-flex flex-column justify-content-between">
