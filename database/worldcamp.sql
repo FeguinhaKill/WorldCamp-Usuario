@@ -33,8 +33,7 @@ CREATE TABLE IF NOT EXISTS `agendardormitorio` (
 INSERT INTO `agendardormitorio` (`Id`, `nome-usuario`, `check-in`, `check-out`, `dormitorio`) VALUES
 	(2, 'FELIPE', '2025-11-17', '2025-11-18', 1),
 	(3, 'Alanbidanos', '2025-11-19', '2025-12-19', 4),
-	(4, 'Alanbidanos', '2025-11-19', '2025-11-20', 2),
-	(5, 'Alanbidanos', '2025-11-19', '2025-11-20', 2);
+	(4, 'Alanbidanos', '2025-11-19', '2025-11-27', 5);
 
 -- Copiando estrutura para tabela worldcamp.agendartrilhas
 CREATE TABLE IF NOT EXISTS `agendartrilhas` (
@@ -44,15 +43,16 @@ CREATE TABLE IF NOT EXISTS `agendartrilhas` (
   `trilha` varchar(50) NOT NULL DEFAULT '',
   `numero_acompanhantes` int DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela worldcamp.agendartrilhas: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.agendartrilhas: ~5 rows (aproximadamente)
 INSERT INTO `agendartrilhas` (`Id`, `nome_usuario`, `data_realizacao`, `trilha`, `numero_acompanhantes`) VALUES
 	(7, 'Alanbidanos', '2025-11-20', 'vale verde', 1),
 	(8, 'Alanbidanos', '2025-11-28', 'pedra clara', 4),
 	(9, 'Alanbidanos', '2025-11-28', 'vale verde', 1),
 	(10, 'Alanbidanos', '2025-11-20', 'pico nebuloso', 1),
-	(11, 'Alanbidanos', '2025-12-04', 'pico nebuloso', 1);
+	(11, 'Alanbidanos', '2025-12-04', 'pico nebuloso', 1),
+	(12, 'Lucas Dacroce', '2025-11-29', 'vale verde', 2);
 
 -- Copiando estrutura para tabela worldcamp.compras_realizadas
 CREATE TABLE IF NOT EXISTS `compras_realizadas` (
@@ -61,30 +61,13 @@ CREATE TABLE IF NOT EXISTS `compras_realizadas` (
   `produtos_json` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `data_compra` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.compras_realizadas: ~7 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.compras_realizadas: ~3 rows (aproximadamente)
 INSERT INTO `compras_realizadas` (`id`, `nome_usuario`, `produtos_json`, `data_compra`) VALUES
 	(4, 'Alanbidanos', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":5}]', '2025-11-19 10:19:48'),
 	(9, 'Felipe', '[{"nome":"Garrafa Térmica WorldCamp","preco":"119.00","quantidade":1338},{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":1}]', '2025-11-19 13:20:10'),
-	(10, 'Alanbidanos', '[{"nome":"Camiseta Personalizada WorldCamp","preco":"89.90","quantidade":1},{"nome":"Kit Aleatório WorldCamp","preco":"159.00","quantidade":1}]', '2025-11-19 13:35:27'),
-	(11, 'Alanbidanos', '[{"nome":"Botas de Chuva Impermeáveis","preco":"249.00","quantidade":1}]', '2025-11-19 13:40:47');
-
--- Copiando estrutura para tabela worldcamp.listausuarios
-CREATE TABLE IF NOT EXISTS `listausuarios` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
-  `cpf` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `telefone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `senha` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela worldcamp.listausuarios: ~2 rows (aproximadamente)
-INSERT INTO `listausuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
-	(3, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q'),
-	(4, 'Alanbidanos', 'alanbidanos@gmail.com', '123-456-789-00', '49 9 1234-5678', '123w');
+	(10, 'Alanbidanos', '[{"nome":"Camiseta Personalizada WorldCamp","preco":89.9,"quantidade":4},{"nome":"Kit Aleatório WorldCamp","preco":"159.00","quantidade":7}]', '2025-11-19 13:35:27');
 
 -- Copiando estrutura para tabela worldcamp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -96,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela worldcamp.produtos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela worldcamp.produtos: ~6 rows (aproximadamente)
 INSERT INTO `produtos` (`id`, `nome`, `categoria`, `preco`, `imagem_path`) VALUES
 	(1, 'Garrafa Térmica WorldCamp', 'Acessório', 119.00, '../../imagens/garrafaLoja.png'),
 	(2, 'Botas de Chuva Impermeáveis', 'Calçado', 249.00, '../../imagens/botaLoja.png'),
@@ -135,6 +118,23 @@ INSERT INTO `produtos_descricao` (`id`, `product_id`, `descricao`) VALUES
 	(16, 6, 'Contém de 3 a 5 itens surpresa'),
 	(17, 6, 'Selecionados pela equipe WorldCamp'),
 	(18, 6, 'Perfeito para quem gosta de novidade');
+
+-- Copiando estrutura para tabela worldcamp.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `cpf` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `telefone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `senha` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela worldcamp.usuarios: ~2 rows (aproximadamente)
+INSERT INTO `usuarios` (`Id`, `nome`, `email`, `cpf`, `telefone`, `senha`) VALUES
+	(3, 'Felipe', 'feguinhak2@gmail.com', '126.263.239-00', '4999804-1402', '123q'),
+	(4, 'Alanbidanos', 'alanbidanos@gmail.com', '123-456-789-00', '49 9 1234-5678', '123w'),
+	(5, 'Lucas Dacroce', 'suportelight@gmail.com', '098-765-432-11', '49 98765-4321', '123e');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
