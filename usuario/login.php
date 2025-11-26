@@ -5,12 +5,12 @@ $db = new db();
 $dados = $db->all();
 
 
-session_start(); //caso uma sessao ja esteja iniciada, pula para a tela do usuario
+session_start(); 
 $_SESSION["nome"] = '';
 $errors = [];
 $email = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?: '';
     $senha = $_POST['senha'] ?? '';
@@ -92,12 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
                     <label for="senha" class="form-label small">Senha</label>
                     <input id="senha" name="senha" type="password" class="form-control" required placeholder="senha..">
                 </div>
-                <!--
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <a href="/telas/recuperar_senha.php" class="small">Esqueci minha senha...</a>
-                </div>
-                FAZER SE SOBRAR TEMPO
-                -->
+            
                 <div class="d-grid mb-2">
                     <button type="submit" class="btn btn-success">Entrar</button>
                 </div>
@@ -113,3 +108,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
 include '../footer.php';
 ?>
 </html>
+
