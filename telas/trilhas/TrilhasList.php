@@ -96,7 +96,7 @@ $agendamento = $db->getTrilhasFiltradas($_POST);
         </div>
     </form>
 
-    <div class="table-responsive">
+    <div class="mb-5 table-responsive">
         <table class="table table-striped table-hover table-inscricoes align-middle">
             <thead>
                 <tr>
