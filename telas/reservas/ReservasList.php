@@ -80,7 +80,7 @@ $reservas = $db->getReservasFiltradas($_POST);
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover table-reservas align-middle">
+        <table class="mb-5 table table-striped table-hover table-reservas align-middle">
             <thead>
                 <tr>
                     <th>#</th>
