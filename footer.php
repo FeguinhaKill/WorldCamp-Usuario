@@ -2,7 +2,7 @@
  
  
  
-    <footer class="bg-dark text-white text-center py-3 fixed-bottom">
+    <footer class="bg-dark text-white text-center py-3">
             <small>&copy; 2025 WorldCamp</small>
     </footer>
  </div>
