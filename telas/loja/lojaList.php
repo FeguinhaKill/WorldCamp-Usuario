@@ -69,8 +69,7 @@ $compras = $db->getComprasFiltradas($_POST);
 </form>
 
 
-    <!-- TABELA -->
-    <div class="table-responsive">
+    <div class="mb-5 table-responsive">
         <table class="table table-striped table-hover table-reservas align-middle">
             <thead>
             <tr>

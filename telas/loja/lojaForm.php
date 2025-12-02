@@ -23,8 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao
 
   $nome_usuario = $_SESSION["nome"];
   $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
-
-  // A data já pode ser salva automaticamente caso sua tabela tenha CURRENT_TIMESTAMP
   $db->query("
         INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
         VALUES (?, ?, NOW())
@@ -38,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao
   
 }
 
-include '../../header.php';
 $comprasBD = $db->query("SELECT * FROM compras_realizadas ORDER BY data_compra DESC");
 
 $compras = [];
@@ -91,6 +88,8 @@ foreach ($produtosBD as $p) {
     'descricaos' => $listaDescricoes
   ];
 }
+
+include '../../header.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -261,7 +260,7 @@ foreach ($produtosBD as $p) {
         return;
       }
 
-      fetch("lojaProdutos.php?acao=finalizar", {
+      fetch("lojaForm.php?acao=finalizar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(carrinho)
@@ -272,7 +271,7 @@ foreach ($produtosBD as $p) {
             alert("Compra finalizada e registrada no banco!");
 
             carrinho.length = 0;
-            mostrarCarrinho(); // atualizar modal
+            mostrarCarrinho(); 
 
             const modalEl = document.getElementById("carrinhoModal");
             const modal = bootstrap.Modal.getInstance(modalEl);
