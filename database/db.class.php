@@ -522,7 +522,7 @@ function finalizarCompra($db)
 function salvarReserva($db)
 {
     if (empty($_POST)) {
-        return; // Nada enviado, nada a fazer
+        return;
     }
 
     try {
@@ -535,19 +535,19 @@ function salvarReserva($db)
 
         if (empty($_POST['Id'])) {
 
-            // Criar
+          
             $db->storeReserva($dados);
             echo "Reserva criada com sucesso!";
 
         } else {
 
-            // Atualizar
+           
             $dados["Id"] = $_POST["Id"];
             $db->updateReserva($dados);
             echo "Reserva atualizada com sucesso!";
         }
 
-        // Redirecionamento com delay
+       
         echo "<script>
                 setTimeout(() => window.location.href = 'ReservasList.php', 800);
               </script>";
@@ -557,7 +557,52 @@ function salvarReserva($db)
         exit();
     }
 }
+function processarTrilha($db) {
+    $data = null;
+
+ 
+    if (!empty($_GET['Id'])) {
+        $data = $db->findTrilha($_GET['Id']);
+    }
+
+
+    if (!empty($_POST)) {
+        try {
+
+        
+            $dadosTrilha = [
+                "nome_usuario"        => $_POST['nome_usuario'],
+                "trilha"              => $_POST['trilha'],
+                "data_realizacao"     => $_POST['data_realizacao'],
+                "numero_acompanhantes"=> $_POST['numero_acompanhantes'],
+            ];
+
+       
+            if (empty($_POST['Id'])) {
+
+                $db->storeTrilha($dadosTrilha);
+                echo "Trilha criada com sucesso!";
+
+            } else {
+          
+                $dadosTrilha["Id"] = $_POST['Id'];
+
+                $db->updateTrilha($dadosTrilha);
+                echo "Trilha atualizada com sucesso!";
+            }
+
+        } catch (Exception $e) {
+          
+            echo "Erro ao salvar trilha: " . $e->getMessage();
+        }
+    }
+
+
+    return $data;
+}
+
 
 
 
 ?>
+
