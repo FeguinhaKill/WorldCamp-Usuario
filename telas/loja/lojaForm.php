@@ -5,36 +5,7 @@ $db = new db();
 
 $db->checkLogin();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["acao"]) && $_GET["acao"] === "finalizar") {
-  $json = file_get_contents("php://input");
-  $carrinho = json_decode($json, true);
-
-  if (!$carrinho) {
-    http_response_code(400);
-    echo "Carrinho inválido";
-    exit;
-  }
-
-  if (!isset($_SESSION["nome"])) {
-    http_response_code(401);
-    echo "Usuário não logado";
-    exit;
-  }
-
-  $nome_usuario = $_SESSION["nome"];
-  $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
-  $db->query("
-        INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
-        VALUES (?, ?, NOW())
-    ", [
-    $nome_usuario,
-    $produtos_json
-  ]);
-
-  echo "OK";
-  exit;
-  
-}
+finalizarCompra($db);
 
 $comprasBD = $db->query("SELECT * FROM compras_realizadas ORDER BY data_compra DESC");
 

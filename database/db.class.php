@@ -482,5 +482,82 @@ public function checkLogin()
 
     
 }
+function finalizarCompra($db)
+{
+    if ($_SERVER["REQUEST_METHOD"] !== "POST" ||
+        !isset($_GET["acao"]) ||
+        $_GET["acao"] !== "finalizar") {
+        return; 
+    }
+
+    $json = file_get_contents("php://input");
+    $carrinho = json_decode($json, true);
+
+    if (!$carrinho) {
+        http_response_code(400);
+        echo "Carrinho inválido";
+        exit;
+    }
+
+    if (!isset($_SESSION["nome"])) {
+        http_response_code(401);
+        echo "Usuário não logado";
+        exit;
+    }
+
+    $nome_usuario = $_SESSION["nome"];
+    $produtos_json = json_encode($carrinho, JSON_UNESCAPED_UNICODE);
+
+    $db->query("
+        INSERT INTO compras_realizadas (nome_usuario, produtos_json, data_compra)
+        VALUES (?, ?, NOW())
+    ", [
+        $nome_usuario,
+        $produtos_json
+    ]);
+
+    echo "OK";
+    exit;
+}
+function salvarReserva($db)
+{
+    if (empty($_POST)) {
+        return; // Nada enviado, nada a fazer
+    }
+
+    try {
+        $dados = [
+            "nome-usuario" => $_POST['nome-usuario'],
+            "check-in"     => $_POST['check-in'],
+            "check-out"    => $_POST['check-out'],
+            "dormitorio"   => $_POST['dormitorio'],
+        ];
+
+        if (empty($_POST['Id'])) {
+
+            // Criar
+            $db->storeReserva($dados);
+            echo "Reserva criada com sucesso!";
+
+        } else {
+
+            // Atualizar
+            $dados["Id"] = $_POST["Id"];
+            $db->updateReserva($dados);
+            echo "Reserva atualizada com sucesso!";
+        }
+
+        // Redirecionamento com delay
+        echo "<script>
+                setTimeout(() => window.location.href = 'ReservasList.php', 800);
+              </script>";
+
+    } catch (Exception $e) {
+        var_dump($e->getMessage());
+        exit();
+    }
+}
+
+
 
 ?>

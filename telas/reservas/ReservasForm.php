@@ -7,37 +7,7 @@ $db = new db();
 $db->checkLogin();
 $data = null;
 
-if (!empty($_POST)) {
-    try {
-        if (empty($_POST['Id'])) {
-            $db->storeReserva([
-                "nome-usuario" => $_POST['nome-usuario'],
-                "check-in"     => $_POST['check-in'],
-                "check-out"    => $_POST['check-out'],
-                "dormitorio"   => $_POST['dormitorio'],
-            ]);
-
-            echo "Reserva criada com sucesso!";
-        } else {
-            $db->updateReserva([
-                "Id"           => $_POST['Id'],
-                "nome-usuario" => $_POST['nome-usuario'],
-                "check-in"     => $_POST['check-in'],
-                "check-out"    => $_POST['check-out'],
-                "dormitorio"   => $_POST['dormitorio'],
-            ]);
-
-            echo "Reserva atualizada com sucesso!";
-        }
-
-        echo "<script>
-                setTimeout(() => window.location.href = 'ReservasList.php', 800);
-             </script>";
-    } catch (Exception $e) {
-        var_dump($e->getMessage());
-        exit();
-    }
-}
+salvarReserva($db);
 
 if (!empty($_GET['Id'])) {
     $data = $db->findReserva($_GET['Id']);
