@@ -599,10 +599,44 @@ function processarTrilha($db) {
 
 
     return $data;
+}function processarUsuario($db) {
+
+    if (empty($_POST)) {
+        return;
+    }
+
+    try {
+     
+        $dadosUsuario = [
+            "id"       => $_POST['id']       ?? null,
+            "nome"     => $_POST['nome']     ?? null,
+            "telefone" => $_POST['telefone'] ?? null,
+            "cpf"      => $_POST['cpf']      ?? null,
+            "email"    => $_POST['email']    ?? null,
+            "senha"    => $_POST['senha']    ?? null,
+        ];
+
+   
+        if (empty($_POST['id'])) {
+
+            $db->store($dadosUsuario);
+            echo "Usuário criado com sucesso";
+
+        } else {
+     
+            $db->update($dadosUsuario);
+            echo "Usuário editado com sucesso";
+        }
+
+    } catch (Exception $e) {
+        echo "Erro ao salvar usuário: " . $e->getMessage();
+    }
 }
 
 
 
 
+
 ?>
+
 
