@@ -2,39 +2,9 @@
 include '../header.php';
 include '../database/db.class.php';
 $db = new db();
-if (!empty($_POST)) {
 
-    try {
-        if (empty($_POST['id'])) {
-            $db->store([
-                "id" => $_POST['id'],
-                "nome" => $_POST['nome'],
-                "telefone" => $_POST['telefone'],
-                "cpf" => $_POST['cpf'],
-                "email" => $_POST['email'],
-                "senha" => $_POST['senha'],
-            ]);
-        echo "Usuario criado com sucesso";
-        } else {
-            $db->update([
-                "id" => $_POST['id'],
-                "nome" => $_POST['nome'],
-                "telefone" => $_POST['telefone'],
-                "cpf" => $_POST['cpf'],
-                "email" => $_POST['email'],
-                "senha" => $_POST['senha'],
-            ]);
-        echo "Usuario editado com sucesso";
-        }
-        echo "<script>
-        setTimeout(
-        ()=>window.location.href = 'login.php', 2200);
-        </script>";
-    } catch (Exception $e) {
-        var_dump("Erro ao criar usuário: " . $e->getMessage());
-        exit;
-    }
-}
+processarUsuario($db);
+
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
@@ -82,3 +52,4 @@ if (!empty($_GET['id'])) {
 <?php
 include '../footer.php';
 ?>
+
