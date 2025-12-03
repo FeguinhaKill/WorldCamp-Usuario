@@ -5,12 +5,12 @@ $db = new db();
 $dados = $db->all();
 
 
-session_start(); //caso uma sessao ja esteja iniciada, pula para a tela do usuario
+session_start(); 
 $_SESSION["nome"] = '';
 $errors = [];
 $email = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL) ?: '';
     $senha = $_POST['senha'] ?? '';
@@ -107,3 +107,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {//if para verificação do usuario
 include '../footer.php';
 ?>
 </html>
+
