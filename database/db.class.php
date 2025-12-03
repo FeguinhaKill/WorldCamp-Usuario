@@ -597,7 +597,7 @@ function processarTrilha($db) {
         }
     }
 
-
+    header('Location: TrilhasList.php');
     return $data;
 }function processarUsuario($db) {
 
