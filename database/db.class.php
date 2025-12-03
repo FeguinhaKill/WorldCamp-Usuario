@@ -632,9 +632,8 @@ function processarTrilha($db) {
         echo "Erro ao salvar usuário: " . $e->getMessage();
     }
     echo "<script>
-                setTimeout(() => window.location.href = 'ReservasList.php', 800);
+                setTimeout(() => window.location.href = 'login.php', 800);
               </script>";
-    header('Location: login.php');
 }
 
 
