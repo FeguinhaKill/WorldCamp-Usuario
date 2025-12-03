@@ -5,46 +5,9 @@ session_start();
 $db = new db();
 $data = null;
 
-if (!empty($_GET['Id'])) {
-  $data = $db->findTrilha($_GET['Id']);
-}
 
-if (!empty($_POST)) {
-  try {
+$data = processarTrilha($db);
 
-    if (empty($_POST['Id'])) {
-
-      $db->storeTrilha([
-        "nome_usuario" => $_POST['nome_usuario'],
-        "trilha" => $_POST['trilha'],
-        "data_realizacao" => $_POST['data_realizacao'],
-        "numero_acompanhantes" => $_POST['numero_acompanhantes'],
-      ]);
-
-      echo "Trilha criada com sucesso!";
-
-    } else {
-
-      $db->updateTrilha([
-        "Id" => $_POST['Id'],
-        "nome_usuario" => $_POST['nome_usuario'],
-        "trilha" => $_POST['trilha'],
-        "data_realizacao" => $_POST['data_realizacao'],
-        "numero_acompanhantes" => $_POST['numero_acompanhantes'],
-      ]);
-
-      echo "Trilha atualizada com sucesso!";
-    }
-
-    echo "<script>
-            setTimeout(() => window.location.href = 'TrilhasList.php', 800);
-          </script>";
-
-  } catch (Exception $e) {
-    var_dump($e->getMessage());
-    exit();
-  }
-}
 
 ?>
 
@@ -236,3 +199,4 @@ if (!empty($_POST)) {
 include '../../footer.php';
 
 ?>
+
