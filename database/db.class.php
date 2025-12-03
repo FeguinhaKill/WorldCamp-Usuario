@@ -288,7 +288,7 @@ public function searchCompras($dados)
 
         if ($tipo == "usuario" && str_contains(strtolower($compra['nome_usuario']), $valor)) {
             $match = true;
-            $itensFiltrados = $compra['itens']; // mantém todos
+            $itensFiltrados = $compra['itens'];
         }
 
         if ($tipo == "data" && str_contains(strtolower($compra['data']), $valor)) {

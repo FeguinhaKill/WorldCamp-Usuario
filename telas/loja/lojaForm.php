@@ -180,11 +180,7 @@ include '../../header.php';
 <body>
   <script>
     const carrinho = [];
-    <?php if ($editando && !empty($compra_itens)): ?>
-     carrinho = <?= json_encode($compra_itens, JSON_UNESCAPED_UNICODE) ?>;
-<?php else: ?>
-     carrinho = [];
-<?php endif; ?>
+    
     function addCarrinho(botao, nome, preco) {
       const noCarrinho = carrinho.find(item => item.nome === nome);
       const quantidade = botao.parentElement.querySelector(".quantidade").value;
