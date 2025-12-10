@@ -595,9 +595,10 @@ function processarTrilha($db) {
           
             echo "Erro ao salvar trilha: " . $e->getMessage();
         }
+    
+    header('Location: TrilhasList.php');
     }
 
-    header('Location: TrilhasList.php');
     return $data;
 }function processarUsuario($db) {
 

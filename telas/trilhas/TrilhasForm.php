@@ -104,7 +104,7 @@ $data = processarTrilha($db);
               De dificuldade moderada, conta com subidas e descidas que exigem um bom
               condicionamento físico, mas nada fora do alcance de quem já pratica caminhadas.<br><br>
               O grupo será guiado por nossos profissionais, definidos conforme a faixa etária,
-              que também apresentam informações sobre a fauna, a flora local e curiosidades sobre
+              que também apresentam informações sobre a fauna, a flora  l e curiosidades sobre
               a montanha e a construção do percurso como um todo.
             </p>
 
